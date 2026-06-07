@@ -54,7 +54,7 @@ This application helps manage employee records using a menu-driven console syste
 ---
 
 ## 📁 Project Structure
-
+---
 employee-management-system/
 │
 ├── src/
@@ -70,7 +70,7 @@ employee-management-system/
 │
 └── README.md
 
-
+---
 ## ⚙️ How to Run
 
 1. Open project in Eclipse / IntelliJ / VS Code  
