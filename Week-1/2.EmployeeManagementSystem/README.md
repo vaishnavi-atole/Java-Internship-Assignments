@@ -1,52 +1,87 @@
-# Employee Management System
+# Employee Management System  
+Week 1 — Assignment 2: Collections, Custom Exceptions, Optional & Streams  
 
-## Overview
+A console-based Employee Management System built in Java that demonstrates Collections Framework, custom exception handling, Java 8 Optional, and Stream API.
 
-Employee Management System is a console-based Java application used to manage employee records. The application allows users to add, view, search, delete, and filter employees through a menu-driven interface.
+## 📌 About
+This application helps manage employee records using a menu-driven console system. It supports adding, viewing, searching, deleting, and filtering employees with proper validations and Java 8 features.
 
-This project demonstrates the use of Java Collections Framework, Custom Exceptions, Optional API, and Stream API while following clean coding practices and a structured package-based architecture.
+## 🚀 Features
 
-## Features
-
-- Add Employee
+- Add Employee (with duplicate ID check)
 - View All Employees
-- Search Employee by ID
-- Delete Employee by ID
+- Search Employee by ID (Optional usage)
+- Delete Employee (Custom Exception handling)
 - Filter Employees by Department
-- Custom Exception Handling
-- Java 8 Optional API
-- Java 8 Stream API
+- Sort Employees by Name and Salary
+- Salary Statistics (min, max, average)
+- Stream API based operations
+- Input validation (basic checks)
 
-## Technologies Used
+---
+
+## 🧠 Concepts Used
+
+### 1. Collections Framework
+- `ArrayList` used to store employee records
+- Efficient data handling and iteration
+
+### 2. Custom Exceptions
+- `EmployeeNotFoundException`
+- `DuplicateEmployeeException`
+- `InvalidInputException`
+- Used for proper error handling and validation
+
+### 3. Java 8 Optional
+- Used for safe search operations
+- Avoids null pointer issues
+
+### 4. Stream API
+- Filtering employees
+- Sorting (name, salary)
+- Aggregations (min, max, average salary)
+- Department-based grouping
+
+---
+
+## 📁 Project Structure
+com.employee
+│
+├── model
+│   └── Employee.java
+│
+├── exception
+│   └── EmployeeNotFoundException.java
+│
+├── service
+│   └── EmployeeService.java
+│
+└── Main.java
+
+## ⚙️ How to Run
+
+1. Open project in Eclipse / IntelliJ / VS Code  
+2. Navigate to `Main.java`  
+3. Run as Java Application  
+4. Use console menu to perform operations  
+
+## 🖥️ Sample Output
+===== Employee Management System =====
+1. Add Employee
+2. View Employees
+3. Search Employee
+4. Delete Employee
+5. Filter By Department
+6. Exit
+
+## 🛠️ Technologies Used
 
 - Java 8+
-- Collections Framework (ArrayList)
+- Collections Framework
 - Stream API
-- Optional API
+- Optional Class
 - Exception Handling
-- Object-Oriented Programming (OOP)
+- OOP Concepts
 
-## Project Structure
-
-employee-management-system/
-│
-├── src/
-│   └── com/
-│       └── company/
-│           └── employeemanagement/
-│               ├── model/
-│               │   └── Employee.java
-│               ├── service/
-│               │   └── EmployeeService.java
-│               ├── exception/
-│               │   └── EmployeeNotFoundException.java
-│               └── Main.java
-│
-└── README.md
-
-## How to Run
-
-### Clone the Repository
-
-```bash
-git clone <repository-url>
+## 👤 Author
+Vaishnavi Atole
