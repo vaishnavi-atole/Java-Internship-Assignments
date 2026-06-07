@@ -19,6 +19,15 @@ This application helps manage employee records using a menu-driven console syste
 - Input validation (basic checks)
 
 ---
+## 🛠️ Technologies Used
+
+- Java 8+
+- Collections Framework
+- Stream API
+- Optional Class
+- Exception Handling
+- OOP Concepts
+
 
 ## 🧠 Concepts Used
 
@@ -45,18 +54,22 @@ This application helps manage employee records using a menu-driven console syste
 ---
 
 ## 📁 Project Structure
-com.employee
+
+employee-management-system/
 │
-├── model
-│   └── Employee.java
+├── src/
+│   └── com/
+│         └── employee/
+│               ├── model/
+│               │   └── Employee.java
+│               ├── service/
+│               │   └── EmployeeService.java
+│               ├── exception/
+│               │   └── EmployeeNotFoundException.java
+│               └── Main.java
 │
-├── exception
-│   └── EmployeeNotFoundException.java
-│
-├── service
-│   └── EmployeeService.java
-│
-└── Main.java
+└── README.md
+
 
 ## ⚙️ How to Run
 
@@ -74,14 +87,6 @@ com.employee
 5. Filter By Department
 6. Exit
 
-## 🛠️ Technologies Used
-
-- Java 8+
-- Collections Framework
-- Stream API
-- Optional Class
-- Exception Handling
-- OOP Concepts
 
 ## 👤 Author
 Vaishnavi Atole
