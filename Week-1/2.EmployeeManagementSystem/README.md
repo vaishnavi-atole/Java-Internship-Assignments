@@ -54,23 +54,23 @@ This application helps manage employee records using a menu-driven console syste
 ---
 
 ## 📁 Project Structure
----
+
+```text
 employee-management-system/
 │
 ├── src/
 │   └── com/
-│         └── employee/
-│               ├── model/
-│               │   └── Employee.java
-│               ├── service/
-│               │   └── EmployeeService.java
-│               ├── exception/
-│               │   └── EmployeeNotFoundException.java
-│               └── Main.java
+│       └── employee/
+│           ├── model/
+│           │   └── Employee.java
+│           ├── service/
+│           │   └── EmployeeService.java
+│           ├── exception/
+│           │   └── EmployeeNotFoundException.java
+│           └── Main.java
 │
 └── README.md
-
----
+```
 ## ⚙️ How to Run
 
 1. Open project in Eclipse / IntelliJ / VS Code  
