@@ -3,10 +3,10 @@ Week 1 — Assignment 2: Collections, Custom Exceptions, Optional & Streams
 
 A console-based Employee Management System built in Java that demonstrates Collections Framework, custom exception handling, Java 8 Optional, and Stream API.
 
-## 📌 About
+## About
 This application helps manage employee records using a menu-driven console system. It supports adding, viewing, searching, deleting, and filtering employees with proper validations and Java 8 features.
 
-## 🚀 Features
+## Features
 
 - Add Employee (with duplicate ID check)
 - View All Employees
@@ -19,7 +19,7 @@ This application helps manage employee records using a menu-driven console syste
 - Input validation (basic checks)
 
 ---
-## 🛠️ Technologies Used
+## Technologies Used
 
 - Java 8+
 - Collections Framework
@@ -29,7 +29,7 @@ This application helps manage employee records using a menu-driven console syste
 - OOP Concepts
 
 
-## 🧠 Concepts Used
+## Concepts Used
 
 ### 1. Collections Framework
 - `ArrayList` used to store employee records
@@ -53,7 +53,7 @@ This application helps manage employee records using a menu-driven console syste
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```text
 employee-management-system/
@@ -71,14 +71,14 @@ employee-management-system/
 │
 └── README.md
 ```
-## ⚙️ How to Run
+## How to Run
 
 1. Open project in Eclipse / IntelliJ / VS Code  
 2. Navigate to `Main.java`  
 3. Run as Java Application  
 4. Use console menu to perform operations  
 
-## 🖥️ Sample Output
+## Sample Output
 ===== Employee Management System =====
 1. Add Employee
 2. View Employees
@@ -88,5 +88,5 @@ employee-management-system/
 6. Exit
 
 
-## 👤 Author
+## Author
 Vaishnavi Atole
