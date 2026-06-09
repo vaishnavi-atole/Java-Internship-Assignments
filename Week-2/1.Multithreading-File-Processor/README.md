@@ -1,88 +1,105 @@
 # Multithreading File Processor
 
-## Overview
+## Description
 
-This project demonstrates Multithreading and File Handling in Java. Multiple files are processed simultaneously using separate threads. The application reads text from input files, converts the content to uppercase, writes the processed content to output files, and logs processing details.
+A Java-based file processing application that demonstrates the use of multithreading and file handling. The application processes multiple text files concurrently using separate threads, transforms file content to uppercase, and records processing activities in a log file.
 
 ## Features
 
-* Multithreaded file processing
-* Read files using BufferedReader
-* Write files using BufferedWriter
-* Process multiple files concurrently
-* Maintain processing logs
+* Concurrent processing of multiple files using Java threads
+* File reading using `BufferedReader`
+* File writing using `BufferedWriter`
+* Thread-safe logging mechanism
 * Clean and modular code structure
+* Exception handling for file operations
 
 ## Technologies Used
 
 * Java
-* Multithreading (Thread, Runnable)
+* Multithreading (`Thread`, `Runnable`)
 * File Handling
 * BufferedReader
 * BufferedWriter
 
 ## Project Structure
 
+```text
 Multithreading_File_Processor
-
+│
 ├── src
-
-│ └── com.fileprocessor
-
-│ ├── Main.java
-
-│ ├── FileProcessor.java
-
-│ └── ProcessingLogger.java
-
+│   └── com.fileprocessor
+│       ├── Main.java
+│       ├── FileProcessor.java
+│       └── ProcessingLogger.java
+│
 ├── input
-
-│ ├── file1.txt
-
-│ └── file2.txt
-
+│   ├── file1.txt
+│   └── file2.txt
+│
 ├── output
-
+│
 ├── logs
-
-│ └── processing.log
-
+│
 └── README.md
+```
 
-## How to Run
+## How It Works
+
+1. Input files are placed inside the `input` directory.
+2. A separate thread is created for each file.
+3. Each thread reads the file content.
+4. The content is converted to uppercase.
+5. Processed data is written to the corresponding output file.
+6. Processing details are stored in `processing.log`.
+
+## Setup Instructions
 
 1. Clone the repository.
-2. Open the project in Eclipse or any Java IDE.
-3. Create the following folders:
 
-   * input
-   * output
-   * logs
-4. Add text files inside the input folder.
-5. Run Main.java.
-6. Processed files will be generated in the output folder.
-7. Processing details will be stored in logs/processing.log.
+```bash
+git clone <repository-url>
+```
+
+2. Open the project in Eclipse or any Java IDE.
+
+3. Create the following directories if they do not exist:
+
+```text
+input
+output
+logs
+```
+
+4. Add text files to the `input` folder.
+
+5. Run `Main.java`.
 
 ## Sample Input
 
-file1.txt
-
+```text
 Hello Java
-
 Multithreading Assignment
+```
 
 ## Sample Output
 
+```text
 HELLO JAVA
-
 MULTITHREADING ASSIGNMENT
+```
 
 ## Learning Outcomes
 
-* Understanding Java Threads
-* Implementing Runnable Interface
-* Reading and Writing Files
-* Synchronization using synchronized keyword
-* Exception Handling
+This project demonstrates:
+
+* Java Multithreading
+* Runnable Interface
+* Thread Management
+* File Handling in Java
+* Buffered Streams
+* Synchronization using `synchronized`
 * Clean Code Practices
 
+## Author
+
+Vaishnavi Atole
