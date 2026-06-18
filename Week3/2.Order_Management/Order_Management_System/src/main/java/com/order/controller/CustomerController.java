@@ -16,7 +16,10 @@ import com.order.entity.Customer;
 import com.order.service.CustomerService;
 
 import jakarta.validation.Valid;
-
+/*
+ * Used to create REST APIs.
+ * Returns data in JSON format.
+ */
 @RestController
 @RequestMapping("/customers")
 public class CustomerController {
@@ -28,7 +31,7 @@ public class CustomerController {
 
         this.service = service;
     }
- /**
+   /*
     *Create a new order for specifies customer
     */
     @PostMapping
@@ -37,18 +40,21 @@ public class CustomerController {
 
         return service.createCustomer(dto);
     }
+    //Get all customers
     @GetMapping
     public List<Customer> getAllCustomers() {
 
         return service.getAllCustomers();
     }
-    
+    //Get a customer by ID
     @GetMapping("/{id}")
     public Customer getCustomerById(
             @PathVariable Long id) {
 
         return service.getCustomerById(id);
     }
+
+    //Update an existing customer
     @PutMapping("/{id}")
     public Customer updateCustomer(
             @PathVariable Long id,
@@ -57,6 +63,8 @@ public class CustomerController {
         return service.updateCustomer(id,
                                               dto);
     }
+
+    //delete a customer by ID
     @DeleteMapping("/{id}")
     public String deleteCustomer(
             @PathVariable Long id) {
