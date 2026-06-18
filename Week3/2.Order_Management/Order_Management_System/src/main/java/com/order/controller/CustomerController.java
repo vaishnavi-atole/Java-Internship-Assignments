@@ -28,7 +28,9 @@ public class CustomerController {
 
         this.service = service;
     }
-
+ /**
+    *Create a new order for specifies customer
+    */
     @PostMapping
     public Customer createCustomer(
             @Valid @RequestBody CustomerRequestDto dto) {
