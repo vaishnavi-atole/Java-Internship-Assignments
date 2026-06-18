@@ -8,11 +8,14 @@ import com.order.entity.OrderEntity;
 import com.order.service.OrderService;
 
 import jakarta.validation.Valid;
-
+/*
+ * Used to create REST APIs and return JSON responses
+    */
 @RestController
+    // Base URL for all APIs in this controller
 @RequestMapping("/orders")
 public class OrderController {
-
+  // Service layer object to handle business logic
     private final OrderService service;
 
     public OrderController(
@@ -20,7 +23,7 @@ public class OrderController {
 
         this.service = service;
     }
-
+    //Create a new order for a customer
     @PostMapping("/{customerId}")
     public OrderEntity createOrder(
             @PathVariable Long customerId,
@@ -30,7 +33,7 @@ public class OrderController {
                 customerId,
                 dto);
     }
-
+    //Get all orders with Pagination and Sorting
     @GetMapping
     public Page<OrderEntity> getAllOrders(
 
@@ -48,13 +51,14 @@ public class OrderController {
                 size,
                 sortBy);
     }
+    // Get a single order by its ID
     @GetMapping("/{id}")
     public OrderEntity getOrderById(
             @PathVariable Long id) {
 
         return service.getOrderById(id);
     }
-
+    // Update an existing order
     @PutMapping("/{id}")
     public OrderEntity updateOrder(
             @PathVariable Long id,
@@ -62,7 +66,7 @@ public class OrderController {
 
         return service.updateOrder(id, dto);
     }
-    
+    // Delete an order using its ID
     @DeleteMapping("/{id}")
     public String deleteOrder(
             @PathVariable Long id) {
