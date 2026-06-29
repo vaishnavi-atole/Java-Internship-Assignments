@@ -1,0 +1,42 @@
+2026-06-29T21:26:34.200+05:30  INFO 25404 --- [EmployeeManagement_Logging] [main] c.l.EmployeeManagementLoggingApplication : Starting EmployeeManagementLoggingApplication using Java 17.0.12 with PID 25404 (C:\Users\VAISHNAVI\JeevLife_InternShip\EmployeeManagement_Logging\target\classes started by Dhanashree in C:\Users\VAISHNAVI\JeevLife_InternShip\EmployeeManagement_Logging)
+2026-06-29T21:26:34.211+05:30 DEBUG 25404 --- [EmployeeManagement_Logging] [main] c.l.EmployeeManagementLoggingApplication : Running with Spring Boot v4.1.0, Spring v7.0.8
+2026-06-29T21:26:34.213+05:30  INFO 25404 --- [EmployeeManagement_Logging] [main] c.l.EmployeeManagementLoggingApplication : No active profile set, falling back to 1 default profile: "default"
+2026-06-29T21:26:34.922+05:30  INFO 25404 --- [EmployeeManagement_Logging] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-29T21:26:34.983+05:30  INFO 25404 --- [EmployeeManagement_Logging] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 50 ms. Found 2 JPA repository interfaces.
+2026-06-29T21:26:35.402+05:30  INFO 25404 --- [EmployeeManagement_Logging] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-06-29T21:26:35.419+05:30  INFO 25404 --- [EmployeeManagement_Logging] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-06-29T21:26:35.420+05:30  INFO 25404 --- [EmployeeManagement_Logging] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.22]
+2026-06-29T21:26:35.498+05:30  INFO 25404 --- [EmployeeManagement_Logging] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1231 ms
+2026-06-29T21:26:35.676+05:30  INFO 25404 --- [EmployeeManagement_Logging] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-06-29T21:26:35.806+05:30  INFO 25404 --- [EmployeeManagement_Logging] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.4.1.Final
+2026-06-29T21:26:36.289+05:30  INFO 25404 --- [EmployeeManagement_Logging] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-29T21:26:36.336+05:30  INFO 25404 --- [EmployeeManagement_Logging] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-06-29T21:26:36.708+05:30  INFO 25404 --- [EmployeeManagement_Logging] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@608f310a
+2026-06-29T21:26:36.710+05:30  INFO 25404 --- [EmployeeManagement_Logging] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-06-29T21:26:36.858+05:30  INFO 25404 --- [EmployeeManagement_Logging] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/logging_db]
+	Database driver: MySQL Connector/J
+	Database dialect: MySQLDialect
+	Database version: 8.0.46
+	Default catalog/schema: logging_db/undefined
+	Autocommit mode: undefined/unknown
+	Isolation level: REPEATABLE_READ [default REPEATABLE_READ]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-06-29T21:26:38.019+05:30  INFO 25404 --- [EmployeeManagement_Logging] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-29T21:26:38.157+05:30  INFO 25404 --- [EmployeeManagement_Logging] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-29T21:26:38.257+05:30  INFO 25404 --- [EmployeeManagement_Logging] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-06-29T21:26:38.525+05:30  WARN 25404 --- [EmployeeManagement_Logging] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-06-29T21:26:39.085+05:30  INFO 25404 --- [EmployeeManagement_Logging] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+2026-06-29T21:26:39.092+05:30  INFO 25404 --- [EmployeeManagement_Logging] [main] c.l.EmployeeManagementLoggingApplication : Started EmployeeManagementLoggingApplication in 5.277 seconds (process running for 5.791)
+2026-06-29T21:29:12.926+05:30  INFO 25404 --- [EmployeeManagement_Logging] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-06-29T21:29:12.926+05:30  INFO 25404 --- [EmployeeManagement_Logging] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-06-29T21:29:12.930+05:30  INFO 25404 --- [EmployeeManagement_Logging] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2026-06-29T21:29:13.547+05:30  INFO 25404 --- [EmployeeManagement_Logging] [http-nio-8080-exec-8] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 295 ms
+2026-06-29T21:29:26.235+05:30  INFO 25404 --- [EmployeeManagement_Logging] [http-nio-8080-exec-9] c.logging.controller.EmployeeController  : API Request: Delete Employee
+2026-06-29T21:29:26.384+05:30  INFO 25404 --- [EmployeeManagement_Logging] [http-nio-8080-exec-9] com.logging.service.EmployeeService      : Deleting employee with id: 1
+2026-06-29T21:29:26.384+05:30  INFO 25404 --- [EmployeeManagement_Logging] [http-nio-8080-exec-9] com.logging.service.EmployeeService      : Fetching employee with id: 1
+2026-06-29T21:30:30.048+05:30  INFO 25404 --- [EmployeeManagement_Logging] [http-nio-8080-exec-6] c.logging.controller.EmployeeController  : API Request: Create Employee
+2026-06-29T21:30:30.061+05:30  INFO 25404 --- [EmployeeManagement_Logging] [http-nio-8080-exec-6] com.logging.service.EmployeeService      : Saving employee: john
