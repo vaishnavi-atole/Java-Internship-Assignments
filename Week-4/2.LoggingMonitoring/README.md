@@ -73,58 +73,6 @@ or run the main class:
 EmployeeManagementLoggingApplication.java
 ```
 
-## API Endpoints
-
-### Create Employee
-
-POST
-
-```text
-/employees
-```
-
-Request Body:
-
-```json
-{
-  "name": "john",
-  "email": "john@gmail.com",
-  "department": "Java"
-}
-```
-
-### Get All Employees
-
-GET
-
-```text
-/employees
-```
-
-### Get Employee By Id
-
-GET
-
-```text
-/employees/{id}
-```
-
-### Update Employee
-
-PUT
-
-```text
-/employees/{id}
-```
-
-### Delete Employee
-
-DELETE
-
-```text
-/employees/{id}
-```
-
 ## Logging Configuration
 
 Logs are generated in:
@@ -156,5 +104,5 @@ Handled Exceptions:
 
 ## Author
 
-Vaishnavi Rajaram Atole
+Vaishnavi Atole
 
