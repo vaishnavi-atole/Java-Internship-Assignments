@@ -1,21 +1,32 @@
-# Task Manager
+# Task Manager UI
 
-Task Manager is a beginner-friendly Angular 20 standalone application for creating, tracking, searching, filtering, sorting, and completing tasks. It uses Angular Reactive Forms, Angular Router, TypeScript, CSS, and browser LocalStorage only.
+Task Manager UI is a beginner-friendly Angular 20 standalone application that allows users to manage daily tasks efficiently. The application supports CRUD (Create, Read, Update, Delete) operations using Angular Reactive Forms, Angular Routing, TypeScript, CSS, and browser LocalStorage for data persistence.
 
 ## Features
 
-- View all saved tasks
-- Add, edit, delete, and mark tasks as completed
-- Search by task title or description
-- Filter by All, Pending, In Progress, and Completed
-- Sort by Newest, Oldest, Due Date, and Priority
-- Dashboard with total, completed, pending, and completion percentage
-- LocalStorage persistence across refreshes and browser reloads
-- Responsive card-based UI without Bootstrap, Tailwind, or Material UI
+- View all tasks
+- Add new tasks
+- Edit existing tasks
+- Delete tasks
+- Form validation using Angular Reactive Forms
+- Angular Routing for navigation
+- LocalStorage persistence across browser refreshes
+- Responsive and user-friendly interface
+- 404 Not Found page for invalid routes
+
+## Technologies Used
+
+- Angular 20
+- TypeScript
+- HTML5
+- CSS3
+- Angular Router
+- Angular Reactive Forms
+- LocalStorage
 
 ## Angular Version
 
-This project was generated with Angular CLI 20.3.30 and uses Angular 20 standalone components.
+This project was generated using Angular CLI 20 and uses Angular Standalone Components.
 
 ## Folder Structure
 
@@ -49,34 +60,54 @@ npm install
 ## Run Project
 
 ```bash
-npm start
+ng serve
 ```
 
-Open `http://localhost:4200/` in the browser.
+Open the following URL in your browser:
 
-## Build
+```text
+http://localhost:4200/
+```
+
+## Build Project
 
 ```bash
-npm run build
+ng build
 ```
 
 ## Screenshots
 
-Add screenshots here after running the project:
+Add screenshots after running the application:
 
-- Dashboard and task list
-- Add task form
-- Edit task form
-- Empty state
+- Home Page (Task List)
+- Add Task Page
+- Edit Task Page
+- Validation Messages
+- 404 Not Found Page
 
 ## LocalStorage Behavior
 
-Tasks are saved under the `task-manager-tasks` LocalStorage key. Tasks remain after refresh, page reload, and application restart. If browser storage is cleared, saved tasks disappear.
+Tasks are stored in browser LocalStorage. Data remains available after page refresh or browser restart. If LocalStorage is cleared, all saved tasks will be removed.
+
+## Learning Outcomes
+
+- Angular Standalone Components
+- Angular Routing
+- Reactive Forms and Validation
+- CRUD Operations
+- LocalStorage Data Management
+- Component-Based Architecture
+- Clean Code Practices
 
 ## Future Improvements
 
-- Add due date reminders
-- Add task categories or tags
-- Add drag-and-drop status changes
-- Add export and import JSON support
-- Add unit tests for the service and form validations
+- Task priority management
+- Task status tracking
+- Search and filter functionality
+- Due date reminders
+- Export and import tasks
+- Unit testing for components and services
+
+## Author
+
+**Vaishnavi Atole**
