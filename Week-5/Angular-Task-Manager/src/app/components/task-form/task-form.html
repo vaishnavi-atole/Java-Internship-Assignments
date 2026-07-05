@@ -1,0 +1,82 @@
+<main class="form-page">
+  <section class="form-header">
+    <p class="eyebrow">{{ isEditMode ? 'Update task details' : 'Create a new task' }}</p>
+    <h1>{{ isEditMode ? 'Edit Task' : 'Add Task' }}</h1>
+  </section>
+
+  <form class="task-form" [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+    <label>
+      <span>Title</span>
+      <input type="text" formControlName="title" placeholder="Enter task title" maxlength="50" />
+    </label>
+    @if (isInvalid('title')) {
+      <p class="error">
+        @if (taskForm.controls.title.hasError('required')) {
+          Title is required
+        } @else if (taskForm.controls.title.hasError('minlength')) {
+          Minimum 3 characters
+        } @else if (taskForm.controls.title.hasError('maxlength')) {
+          Maximum 50 characters
+        }
+      </p>
+    }
+
+    <label>
+      <span>Description</span>
+      <textarea
+        formControlName="description"
+        placeholder="Enter at least 10 characters"
+        rows="5"
+      ></textarea>
+    </label>
+    @if (isInvalid('description')) {
+      <p class="error">
+        @if (taskForm.controls.description.hasError('required')) {
+          Description is required
+        } @else if (taskForm.controls.description.hasError('minlength')) {
+          Minimum 10 characters
+        }
+      </p>
+    }
+
+    <div class="form-row">
+      <label>
+        <span>Priority</span>
+        <select formControlName="priority">
+          @for (priority of priorities; track priority) {
+            <option [value]="priority">{{ priority }}</option>
+          }
+        </select>
+      </label>
+
+      <label>
+        <span>Status</span>
+        <select formControlName="status">
+          @for (status of statuses; track status) {
+            <option [value]="status">{{ status }}</option>
+          }
+        </select>
+      </label>
+    </div>
+
+    <label>
+      <span>Due Date</span>
+      <input type="date" formControlName="dueDate" [min]="today" />
+    </label>
+    @if (isInvalid('dueDate')) {
+      <p class="error">
+        @if (taskForm.controls.dueDate.hasError('required')) {
+          Due date required
+        } @else {
+          Past dates not allowed
+        }
+      </p>
+    }
+
+    <div class="form-actions">
+      <button class="btn primary" type="submit" [disabled]="taskForm.invalid">Save</button>
+      <button class="btn secondary" type="button" (click)="onReset()">Reset</button>
+      <a class="btn ghost" routerLink="/tasks">Cancel</a>
+    </div>
+  </form>
+</main>

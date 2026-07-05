@@ -1,0 +1,18 @@
+<header class="navbar">
+  <a class="brand" routerLink="/dashboard" aria-label="Task Manager home">
+    <span class="brand-mark">TM</span>
+    <span>Task Manager</span>
+  </a>
+
+  <nav class="nav-links" aria-label="Main navigation">
+    <a routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      Dashboard
+    </a>
+    <a routerLink="/tasks" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      Tasks
+    </a>
+    <a routerLink="/tasks/add" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      Add Task
+    </a>
+  </nav>
+</header>

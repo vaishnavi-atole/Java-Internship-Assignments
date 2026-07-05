@@ -1,0 +1,38 @@
+.not-found {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  max-width: 640px;
+  min-height: 60vh;
+  padding: 4rem 1rem;
+  text-align: center;
+}
+
+.code {
+  color: #2563eb;
+  font-size: 1rem;
+  font-weight: 900;
+  margin: 0 0 0.5rem;
+}
+
+h1 {
+  color: #111827;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1;
+  margin: 0;
+}
+
+p {
+  color: #4b5563;
+  line-height: 1.6;
+}
+
+a {
+  background: #2563eb;
+  border-radius: 8px;
+  color: #ffffff;
+  font-weight: 800;
+  padding: 0.85rem 1rem;
+  text-decoration: none;
+}

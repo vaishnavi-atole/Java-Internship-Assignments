@@ -1,0 +1,36 @@
+<main class="dashboard-page">
+  <section class="hero">
+    <div>
+      <p class="eyebrow">Angular 20 Standalone App</p>
+      <h1>Dashboard</h1>
+      <p class="intro">
+        See your task totals, completion progress, and pending workload at a glance.
+      </p>
+    </div>
+    <a class="primary-action" routerLink="/tasks">View Tasks</a>
+  </section>
+
+  @if (dashboardData$ | async; as dashboardData) {
+    <section class="dashboard" aria-label="Task dashboard">
+      <article class="summary-card total">
+        <p>Total Tasks</p>
+        <strong>{{ dashboardData.totalTasks }}</strong>
+      </article>
+
+      <article class="summary-card completed">
+        <p>Completed Tasks</p>
+        <strong>{{ dashboardData.completedTasks }}</strong>
+      </article>
+
+      <article class="summary-card pending">
+        <p>Pending Tasks</p>
+        <strong>{{ dashboardData.pendingTasks }}</strong>
+      </article>
+
+      <article class="summary-card progress">
+        <p>Completion</p>
+        <strong>{{ dashboardData.completionPercentage }}%</strong>
+      </article>
+    </section>
+  }
+</main>
