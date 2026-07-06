@@ -1,23 +1,34 @@
 # Cartly — Angular Shopping Cart
 
-Cartly is a responsive shopping cart application built with Angular 20 standalone components. It demonstrates reactive state management, HTTP integration, lazy routing, reusable UI components, and browser persistence without a third-party state or CSS library.
+Cartly is a responsive shopping cart application built using Angular 20 standalone components. The application demonstrates Angular HttpClient integration, reactive state management with RxJS, routing, reusable components, and browser persistence using LocalStorage.
 
 ## Features
 
-- Product catalog powered by Fake Store API
-- Search by title or category
-- Category filters and price sorting
-- Loading, automatic retry, error, and empty states
-- Add, increase, decrease, remove, and clear cart actions
-- Reactive item count and totals across the application
-- Cart persistence with `localStorage`
-- Responsive navigation, product grid, and cart
-- Accessible controls and reduced-motion support
-- Lazy-loaded standalone page components
+- Fetch products from Fake Store API using Angular HttpClient
+- Search products by title or category
+- Filter products by category
+- Sort products by price
+- Loading, error, retry, and empty state handling
+- Add products to cart
+- Increase and decrease product quantity
+- Remove individual products from cart
+- Clear complete cart
+- Reactive cart item count and total price calculation
+- LocalStorage persistence across browser refreshes
+- Responsive user interface
+- Lazy-loaded standalone components and routes
 
-## Technologies
+## Technologies Used
 
-Angular 20, TypeScript, RxJS, Angular Router, Angular HttpClient, standalone components, HTML, and pure CSS.
+- Angular 20
+- TypeScript
+- RxJS
+- Angular Router
+- Angular HttpClient
+- Standalone Components
+- HTML5
+- CSS3
+- LocalStorage
 
 ## Folder Structure
 
@@ -44,33 +55,92 @@ src/app/
 └── app.routes.ts
 ```
 
-## Installation and Running
-
-Requirements: a version supported by Angular 20—Node.js 20.19+, 22.12+, or 24—and npm. Node.js 25/26 is not supported by Angular 20.
+## Installation
 
 ```bash
 npm install
+```
+
+## Run Project
+
+```bash
 npm start
 ```
 
-Visit `http://localhost:4200`. Create an optimized build with `npm run build`.
+or
 
-## API
+```bash
+ng serve
+```
 
-Products are loaded from [Fake Store API](https://fakestoreapi.com/products). Failed requests are retried twice before the UI displays a retry action.
+Open the following URL in your browser:
+
+```text
+http://localhost:4200
+```
+
+## Build Project
+
+```bash
+npm run build
+```
+
+## API Integration
+
+The application consumes product data from the Fake Store API using Angular HttpClient.
+
+API Endpoint:
+
+```text
+https://fakestoreapi.com/products
+```
+
+Failed API requests are automatically retried before displaying an error message and retry option to the user.
 
 ## State Management
 
-`CartService` owns the only mutable cart state in a private `BehaviorSubject`. Components consume read-only `cart$`, `itemCount$`, and `total$` observables using the async pipe. Every cart operation creates a new array and emits it, so all subscribed views update automatically. The emitted state is also serialized to `localStorage` and safely restored on startup.
+The application uses RxJS `BehaviorSubject` for managing cart state.
 
-## Lazy Loading
+Features include:
 
-Home, Products, Product Details, Cart, and Not Found are standalone components loaded with route-level dynamic imports. Their JavaScript is split into separate chunks and requested only when each route is visited.
+- Reactive cart updates
+- Shared state across components
+- Item count tracking
+- Total price calculation
+- LocalStorage synchronization
+
+## Routing and Lazy Loading
+
+The application uses Angular Router with lazy-loaded standalone components for:
+
+- Home
+- Products
+- Product Details
+- Cart
+- Not Found Page
+
+This improves performance by loading pages only when required.
 
 ## Screenshots
 
-Add project screenshots to a `docs/screenshots` directory and reference them here after deployment.
+Add screenshots after running the project:
 
-## License
+- Home Page
+- Product Listing Page
+- Product Details Page
+- Shopping Cart Page
+- Error and Empty States
 
-This project is available for educational use.
+## Learning Outcomes
+
+- Angular HttpClient Integration
+- REST API Consumption
+- RxJS State Management
+- Angular Routing and Lazy Loading
+- Reusable Component Architecture
+- LocalStorage Data Persistence
+- Responsive UI Development
+
+## Author
+
+**Vaishnavi Atole**
