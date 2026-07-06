@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap');
+:root { --primary: #4f46e5; --primary-dark: #3730a3; --primary-soft: #eae9ff; --ink: #172033; --muted: #64748b; --border: #e5e7eb; --radius: 16px; --shadow: 0 18px 42px rgba(15,23,42,.12); }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; color: var(--ink); background: #fff; font-family: 'DM Sans', system-ui, -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+button, input, select { font: inherit; }
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid #a5b4fc; outline-offset: 2px; }
+a { color: inherit; text-decoration: none; }
+.container { width: min(1180px, calc(100% - 2rem)); margin-inline: auto; }
+.page-section { padding: clamp(2.5rem, 6vw, 5rem) 0; }
+.button { display: inline-flex; min-height: 46px; align-items: center; justify-content: center; padding: .75rem 1.2rem; border: 0; border-radius: 10px; color: white; background: var(--primary); font-weight: 750; cursor: pointer; box-shadow: 0 7px 18px rgba(79,70,229,.22); transition: transform .18s, background .18s; }
+.button:hover { background: var(--primary-dark); transform: translateY(-2px); }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; } }

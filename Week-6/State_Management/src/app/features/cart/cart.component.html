@@ -1,0 +1,33 @@
+<section class="page-section container">
+  <header class="page-header"><span>Your selection</span><h1>Shopping cart</h1></header>
+  @if (cart.cart$ | async; as items) {
+    @if (items.length) {
+      <div class="cart-layout">
+        <div class="cart-list">
+          <div class="list-heading"><h2>Cart items</h2><button type="button" (click)="clear()">Clear cart</button></div>
+          @for (item of items; track trackItem($index, item)) {
+            <article class="cart-item">
+              <div class="image"><img [src]="item.image" [alt]="item.title"></div>
+              <div class="details"><span>{{ item.category }}</span><h3>{{ item.title }}</h3><strong>{{ item.price | currency:'INR':'symbol':'1.2-2' }} each</strong></div>
+              <div class="quantity" aria-label="Quantity controls">
+                <button type="button" [attr.aria-label]="'Decrease ' + item.title" (click)="decrease(item.id)">−</button><span>{{ item.quantity }}</span><button type="button" [attr.aria-label]="'Increase ' + item.title" (click)="increase(item.id)">+</button>
+              </div>
+              <strong class="line-total">{{ item.price * item.quantity | currency:'INR':'symbol':'1.2-2' }}</strong>
+              <button class="remove" type="button" [attr.aria-label]="'Remove ' + item.title" (click)="remove(item.id)">Remove</button>
+            </article>
+          }
+        </div>
+        <aside class="summary">
+          <h2>Order summary</h2>
+          <div><span>Total items</span><strong>{{ cart.itemCount$ | async }}</strong></div>
+          <div><span>Total price</span><strong>{{ cart.total$ | async | currency:'INR':'symbol':'1.2-2' }}</strong></div>
+          <hr><div class="grand-total"><span>Grand total</span><strong>{{ cart.total$ | async | currency:'INR':'symbol':'1.2-2' }}</strong></div>
+          <button class="button checkout" type="button">Proceed to checkout</button>
+          <a routerLink="/products">← Continue shopping</a>
+        </aside>
+      </div>
+    } @else {
+      <div class="empty-cart"><div>🛒</div><h2>Your cart is empty</h2><p>Looks like you haven't added anything yet.</p><a class="button" routerLink="/products">Explore products</a></div>
+    }
+  }
+</section>

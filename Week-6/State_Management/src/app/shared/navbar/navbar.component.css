@@ -1,0 +1,15 @@
+.navbar { position: sticky; top: 0; z-index: 20; background: rgba(255,255,255,.94); border-bottom: 1px solid var(--border); backdrop-filter: blur(12px); }
+.nav-content { min-height: 72px; display: flex; align-items: center; justify-content: space-between; }
+.brand { color: var(--ink); font-size: 1.55rem; font-weight: 800; letter-spacing: -.04em; }
+.brand span { color: var(--primary); }
+nav { display: flex; gap: .5rem; align-items: center; }
+nav a { color: var(--muted); padding: .65rem .9rem; border-radius: 10px; font-weight: 650; }
+nav a:hover, nav a.active { color: var(--primary-dark); background: var(--primary-soft); }
+.badge { display: inline-grid; place-items: center; min-width: 25px; height: 25px; margin-left: .25rem; padding: 0 .4rem; border-radius: 999px; color: white; background: var(--primary); font-size: .78rem; }
+.menu-button { display: none; border: 0; background: transparent; padding: .5rem; }
+.menu-button span { display: block; width: 24px; height: 2px; margin: 5px; background: var(--ink); }
+@media (max-width: 640px) {
+  .menu-button { display: block; }
+  nav { display: none; position: absolute; top: 72px; left: 1rem; right: 1rem; padding: .75rem; flex-direction: column; align-items: stretch; background: white; border: 1px solid var(--border); border-radius: 14px; box-shadow: var(--shadow); }
+  nav.open { display: flex; } nav a { text-align: center; }
+}

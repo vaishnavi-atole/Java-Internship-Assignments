@@ -1,0 +1,29 @@
+<section class="page-section container">
+  <a class="back-link" routerLink="/products">← Back to products</a>
+
+  @if (state$ | async; as state) {
+    @if (state.loading) {
+      <app-loading-spinner />
+    } @else if (state.error) {
+      <div class="error-state" role="alert">
+        <span>!</span>
+        <h1>Product unavailable</h1>
+        <p>{{ state.error }}</p>
+        <button class="button" type="button" (click)="retry()">Try again</button>
+      </div>
+    } @else if (state.product; as product) {
+      <article class="product-details">
+        <div class="product-image"><img [src]="product.image" [alt]="product.title"></div>
+        <div class="product-copy">
+          <span class="category">{{ product.category }}</span>
+          <h1>{{ product.title }}</h1>
+          <div class="rating"><strong>★ {{ product.rating.rate }}</strong><span>{{ product.rating.count }} ratings</span></div>
+          <p class="description">{{ product.description }}</p>
+          <strong class="price">{{ product.price | currency:'INR':'symbol':'1.2-2' }}</strong>
+          <button class="button add-button" type="button" (click)="addToCart(product)">Add to cart</button>
+          <ul><li>Secure shopping cart</li><li>Quantity can be updated anytime</li><li>Your cart is saved automatically</li></ul>
+        </div>
+      </article>
+    }
+  }
+</section>

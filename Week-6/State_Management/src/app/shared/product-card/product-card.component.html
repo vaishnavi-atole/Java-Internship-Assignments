@@ -1,0 +1,21 @@
+<article
+  class="product-card"
+  role="link"
+  tabindex="0"
+  [attr.aria-label]="'View ' + product().title"
+  (click)="openProduct()"
+  (keydown)="handleKeydown($event)"
+>
+  <div class="image-wrap"><img [src]="product().image" [alt]="product().title" loading="lazy"></div>
+  <div class="card-body">
+    <span class="category">{{ product().category }}</span>
+    <h3 [title]="product().title">{{ product().title }}</h3>
+    <div class="meta">
+      <strong>{{ product().price | currency:'INR':'symbol':'1.2-2' }}</strong>
+      <span class="rating" [attr.aria-label]="product().rating.rate + ' out of 5 stars'">★ {{ product().rating.rate }} <small>({{ product().rating.count }})</small></span>
+    </div>
+    <button class="button add-button" [class.added]="added()" type="button" (click)="addProduct($event)">
+      {{ added() ? 'Added ✓' : 'Add to cart' }}
+    </button>
+  </div>
+</article>

@@ -1,0 +1,14 @@
+.back-link { display: inline-block; margin-bottom: 2rem; color: var(--primary); font-weight: 700; }
+.product-details { display: grid; grid-template-columns: minmax(320px, .9fr) minmax(360px, 1.1fr); gap: clamp(2rem, 6vw, 5rem); align-items: center; }
+.product-image { height: min(560px, 60vw); min-height: 390px; display: grid; place-items: center; padding: clamp(2rem, 5vw, 4rem); border: 1px solid var(--border); border-radius: 24px; background: white; box-shadow: 0 12px 35px rgba(15,23,42,.07); }
+.product-image img { width: 100%; height: 100%; object-fit: contain; }
+.category { display: inline-block; padding: .35rem .7rem; border-radius: 99px; color: var(--primary-dark); background: var(--primary-soft); font-size: .78rem; font-weight: 800; text-transform: capitalize; }
+h1 { margin: 1rem 0; font-size: clamp(2rem, 5vw, 3.3rem); line-height: 1.12; letter-spacing: -.045em; }
+.rating { display: flex; gap: .75rem; align-items: center; }.rating strong { color: #ca8a04; }.rating span { color: var(--muted); }
+.description { margin: 1.5rem 0; color: var(--muted); font-size: 1.05rem; line-height: 1.75; }
+.price { display: block; margin-bottom: 1.2rem; font-size: 2rem; }
+.add-button { width: min(100%, 360px); }
+ul { margin: 1.5rem 0 0; padding: 0; display: grid; gap: .6rem; color: var(--muted); list-style: none; font-size: .9rem; }li::before { content: '✓'; margin-right: .6rem; color: #15803d; font-weight: 800; }
+.error-state { min-height: 420px; display: grid; place-content: center; justify-items: center; text-align: center; }.error-state > span { width: 54px; height: 54px; display: grid; place-items: center; border-radius: 50%; color: #b91c1c; background: #fee2e2; font-size: 1.6rem; font-weight: 800; }.error-state h1 { margin-bottom: 0; }.error-state p { color: var(--muted); }
+@media (max-width: 800px) { .product-details { grid-template-columns: 1fr; }.product-image { height: 420px; min-height: 0; }.product-copy { max-width: 650px; } }
+@media (max-width: 480px) { .product-image { height: 330px; padding: 2rem; }.add-button { width: 100%; } }
