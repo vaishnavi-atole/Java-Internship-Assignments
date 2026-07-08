@@ -1,0 +1,65 @@
+<main class="page">
+  <section class="hero">
+    <div>
+      <p class="eyebrow">Task Workspace</p>
+      <h1>Tasks</h1>
+      <p class="intro">
+        Search, filter, sort, and manage every saved task from one focused view.
+      </p>
+    </div>
+    <a class="primary-action" routerLink="/tasks/add">Add Task</a>
+  </section>
+
+  <section class="toolbar" aria-label="Task controls">
+    <label>
+      <span>Search</span>
+      <input
+        type="search"
+        name="search"
+        placeholder="Search title or description"
+        [(ngModel)]="searchTerm"
+      />
+    </label>
+
+    <label>
+      <span>Status</span>
+      <select name="status" [(ngModel)]="selectedStatus">
+        @for (status of statusOptions; track status) {
+          <option [value]="status">{{ status }}</option>
+        }
+      </select>
+    </label>
+
+    <label>
+      <span>Sort By</span>
+      <select name="sort" [(ngModel)]="selectedSort">
+        @for (sortOption of sortOptions; track sortOption) {
+          <option [value]="sortOption">{{ sortOption }}</option>
+        }
+      </select>
+    </label>
+  </section>
+
+  @if (tasks$ | async; as allTasks) {
+    @let visibleTasks = getVisibleTasks(allTasks);
+
+    @if (visibleTasks.length > 0) {
+      <section class="task-grid" aria-label="Task list">
+        @for (task of visibleTasks; track trackByTaskId($index, task)) {
+          <app-task-card
+            [task]="task"
+            [searchTerm]="searchTerm"
+            (deleteTask)="deleteTask($event)"
+            (completeTask)="markTaskCompleted($event)"
+          />
+        }
+      </section>
+    } @else {
+      <section class="empty-state">
+        <h2>No tasks found</h2>
+        <p>Create a new task or adjust your search and filter selections.</p>
+        <a routerLink="/tasks/add">Create Task</a>
+      </section>
+    }
+  }
+</main>
