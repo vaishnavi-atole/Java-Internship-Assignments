@@ -1,0 +1,18 @@
+<div class="dialog-shell" [class.dialog-shell--danger]="data.tone === 'danger'">
+  <div class="dialog-icon" *ngIf="data.tone === 'danger'">!</div>
+
+  <h2 mat-dialog-title>{{ data.title }}</h2>
+
+  <mat-dialog-content>
+    <p>{{ data.message }}</p>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-stroked-button type="button" (click)="cancel()">
+      {{ data.cancelText || 'Cancel' }}
+    </button>
+    <button mat-flat-button color="warn" type="button" (click)="confirm()">
+      {{ data.confirmText || 'Delete' }}
+    </button>
+  </mat-dialog-actions>
+</div>

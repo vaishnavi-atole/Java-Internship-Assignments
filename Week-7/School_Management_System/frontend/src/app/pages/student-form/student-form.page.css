@@ -1,0 +1,33 @@
+.page-head { margin-bottom: 24px; }
+.eyebrow { display:inline-flex; color:#4f46e5; font-weight:800; text-transform:uppercase; letter-spacing:.08em; font-size:12px; margin-bottom:8px; }
+.page-head h1 { margin:0; font-size: 36px; color:#0f172a; }
+.page-head p { margin:6px 0 0; color:#64748b; }
+.form-layout { display:grid; grid-template-columns:minmax(0, 1fr) 340px; gap:18px; align-items:start; }
+.form-card, .summary-card { border-radius: 28px; border:1px solid rgba(148, 163, 184, .18); }
+.form-card { padding: 26px; background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%); }
+.form-section { padding: 4px 0 22px; margin-bottom: 22px; border-bottom:1px solid #e2e8f0; }
+.form-section:last-of-type { border-bottom:0; margin-bottom: 12px; }
+.section-head { display:flex; gap:14px; align-items:center; margin-bottom:18px; }
+.section-step {
+  width:42px; height:42px; border-radius:14px; display:grid; place-items:center;
+  background:#4f46e5; color:white; font-weight:900; box-shadow:0 12px 28px rgba(79,70,229,.22);
+}
+.section-head h2 { margin:0; font-size:22px; color:#0f172a; }
+.section-head p { margin:4px 0 0; color:#64748b; }
+.form-grid { display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.full-width { grid-column: 1 / -1; }
+.actions { display:flex; gap: 12px; justify-content:flex-end; padding-top:4px; }
+.actions button { min-width: 160px; min-height: 46px; border-radius: 12px; }
+.form-error { margin-bottom:16px; padding:14px 16px; border-radius:14px; background:#fee2e2; color:#991b1b; font-weight:700; }
+.side-panel { position:sticky; top:92px; }
+.summary-card { padding:24px; background:#0f172a; color:white; overflow:hidden; }
+.summary-badge {
+  width:58px; height:58px; border-radius:20px; display:grid; place-items:center;
+  background:#4f46e5; color:white; font-weight:900; margin-bottom:18px;
+}
+.summary-card h2 { margin:0; color:white; font-size:24px; }
+.summary-card p { margin:8px 0 18px; color:#cbd5e1; line-height:1.5; }
+.summary-list { display:grid; gap:10px; }
+.summary-list span { padding:12px; border-radius:14px; background:rgba(255,255,255,.08); color:#e2e8f0; font-weight:700; }
+@media (max-width: 1100px) { .form-layout { grid-template-columns:1fr; } .side-panel { position:static; } }
+@media (max-width: 900px) { .form-grid { grid-template-columns: 1fr; } .actions { flex-direction:column; } .actions button { width:100%; } }

@@ -1,0 +1,86 @@
+<div class="page-head">
+  <div>
+    <span class="eyebrow">Admin workspace</span>
+    <h1>Create Teacher</h1>
+    <p>Create a secure teacher login for managing students and attendance.</p>
+  </div>
+</div>
+
+<section class="teacher-layout">
+  <mat-card class="form-card">
+    <div class="form-hero">
+      <div class="avatar-preview">{{ previewInitial }}</div>
+      <div>
+        <h2>Teacher account</h2>
+        <p>The teacher will use this email and password to sign in.</p>
+      </div>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" class="form-grid">
+      <mat-form-field appearance="outline">
+        <mat-label>Full name</mat-label>
+        <input matInput formControlName="name" placeholder="Example: Akash Kumar">
+        <mat-error *ngIf="form.controls.name.hasError('required')">Name is required</mat-error>
+        <mat-error *ngIf="form.controls.name.hasError('minlength')">Minimum 2 characters</mat-error>
+        <mat-error *ngIf="form.controls.name.hasError('maxlength')">Maximum 100 characters</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" type="email" placeholder="teacher@example.com">
+        <mat-error *ngIf="form.controls.email.hasError('required')">Email is required</mat-error>
+        <mat-error *ngIf="form.controls.email.hasError('email')">Enter a valid email</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          formControlName="password"
+          [type]="showPassword ? 'text' : 'password'"
+          autocomplete="new-password"
+        >
+        <button
+          mat-icon-button
+          matIconSuffix
+          type="button"
+          [attr.aria-label]="showPassword ? 'Hide teacher password' : 'Show teacher password'"
+          (click)="showPassword = !showPassword"
+        >
+          <mat-icon>{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+        <mat-hint>Minimum 8 characters with at least one letter and one number.</mat-hint>
+        <mat-error *ngIf="form.controls.password.hasError('required')">Password is required</mat-error>
+        <mat-error *ngIf="form.controls.password.hasError('pattern')">Use 8+ characters with a letter and a number</mat-error>
+      </mat-form-field>
+
+      <div class="error full-width" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+      <div class="actions full-width">
+        <button mat-stroked-button routerLink="/admin/teachers">Cancel</button>
+        <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid || loading">
+          {{ loading ? 'Creating...' : 'Create Teacher' }}
+        </button>
+      </div>
+    </form>
+  </mat-card>
+
+  <mat-card class="side-card">
+    <span class="side-card__label">Teacher permissions</span>
+    <h2>What teachers can do</h2>
+    <div class="permission-list">
+      <div>
+        <strong>View students</strong>
+        <span>Access student records assigned in the system.</span>
+      </div>
+      <div>
+        <strong>Mark attendance</strong>
+        <span>Record present/absent status date-wise.</span>
+      </div>
+      <div>
+        <strong>Protected access</strong>
+        <span>Cannot create/delete admin-only records.</span>
+      </div>
+    </div>
+  </mat-card>
+</section>

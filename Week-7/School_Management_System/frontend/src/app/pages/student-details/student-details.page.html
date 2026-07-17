@@ -1,0 +1,30 @@
+<div class="page-head">
+  <div>
+    <h1>Student Details</h1>
+    <p>Profile view for a single student record.</p>
+  </div>
+  <div class="actions" *ngIf="!isStudent">
+    <a mat-flat-button color="primary" [routerLink]="['/students', student?.id, 'attendance']">Attendance</a>
+    <a mat-stroked-button routerLink="/students">Back to list</a>
+  </div>
+</div>
+
+<mat-card class="details-card" *ngIf="student; else loadingState">
+  <div class="details-grid">
+    <div><span>Student ID</span><strong>{{ student.studentId }}</strong></div>
+    <div><span>Name</span><strong>{{ student.firstName }} {{ student.lastName }}</strong></div>
+    <div><span>Email</span><strong>{{ student.email }}</strong></div>
+    <div><span>Phone</span><strong>{{ student.phone }}</strong></div>
+    <div><span>Gender</span><strong>{{ student.gender }}</strong></div>
+    <div><span>Date of Birth</span><strong>{{ student.dateOfBirth | date:'mediumDate' }}</strong></div>
+    <div><span>Department</span><strong>{{ student.department }}</strong></div>
+    <div><span>Course</span><strong>{{ student.course }}</strong></div>
+    <div><span>Semester</span><strong>{{ student.semester }}</strong></div>
+    <div><span>Section</span><strong>{{ student.section }}</strong></div>
+    <div class="span-2"><span>Address</span><strong>{{ student.address }}</strong></div>
+  </div>
+</mat-card>
+
+<ng-template #loadingState>
+  <mat-card class="details-card loading">Loading student details...</mat-card>
+</ng-template>

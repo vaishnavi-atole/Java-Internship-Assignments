@@ -1,0 +1,82 @@
+<div class="shell">
+  <aside class="sidebar" [class.sidebar--open]="mobileOpen()">
+    <div class="sidebar__glow sidebar__glow--one"></div>
+    <div class="sidebar__glow sidebar__glow--two"></div>
+
+    <div class="brand-card">
+      <div class="brand__mark">SM</div>
+      <div class="brand__copy">
+        <div class="brand__title">Student Management</div>
+        <div class="brand__subtitle">College ERP Dashboard</div>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <span class="nav__label">Workspace</span>
+      <a mat-list-item routerLink="/dashboard" routerLinkActive="active">
+        <span class="nav__dot"></span>
+        <span>Dashboard</span>
+      </a>
+      <a mat-list-item routerLink="/students" routerLinkActive="active" *ngIf="isStaff">
+        <span class="nav__dot"></span>
+        <span>Students</span>
+      </a>
+      <a mat-list-item routerLink="/my-details" routerLinkActive="active" *ngIf="authService.hasRole('STUDENT')">
+        <span class="nav__dot"></span>
+        <span>My Details</span>
+      </a>
+      <a mat-list-item routerLink="/my-attendance" routerLinkActive="active" *ngIf="authService.hasRole('STUDENT')">
+        <span class="nav__dot"></span>
+        <span>My Attendance</span>
+      </a>
+      <a mat-list-item routerLink="/admin/teachers" routerLinkActive="active" *ngIf="authService.hasRole('ADMIN')">
+        <span class="nav__dot"></span>
+        <span>Teachers</span>
+      </a>
+      <a mat-list-item routerLink="/profile" routerLinkActive="active">
+        <span class="nav__dot"></span>
+        <span>Profile</span>
+      </a>
+    </nav>
+
+    <div class="sidebar__footer" *ngIf="authService.hasRole('ADMIN')">
+      <span class="nav__label">Quick actions</span>
+      <button class="quick-action quick-action--student" mat-button routerLink="/students/new">
+        <span>+</span>
+        Add Student
+      </button>
+      <button class="quick-action quick-action--teacher" mat-button routerLink="/admin/teachers/new">
+        <span>+</span>
+        Create Teacher
+      </button>
+    </div>
+  </aside>
+
+  <section class="main-panel">
+    <mat-toolbar class="topbar" color="primary">
+      <button mat-icon-button class="menu-button" (click)="toggleSidebar()">
+        <span class="menu-button__icon">☰</span>
+      </button>
+
+      <div class="topbar__title">
+        <span class="topbar__eyebrow">College ERP</span>
+        <strong>College Student Management System</strong>
+      </div>
+      <span class="spacer"></span>
+
+      <button mat-button class="account-button" [matMenuTriggerFor]="accountMenu">
+        <span class="account-button__avatar">{{ currentUserInitials }}</span>
+        <span class="account-button__name" *ngIf="authService.user$ | async as user">{{ user.name }}</span>
+      </button>
+      <span class="role-chip" *ngIf="currentRole">{{ currentRole }}</span>
+      <mat-menu #accountMenu="matMenu">
+        <button mat-menu-item routerLink="/profile">Profile</button>
+        <button mat-menu-item (click)="logout()">Logout</button>
+      </mat-menu>
+    </mat-toolbar>
+
+    <main class="content">
+      <router-outlet></router-outlet>
+    </main>
+  </section>
+</div>

@@ -1,0 +1,97 @@
+<section class="auth-screen">
+  <div class="auth-orb auth-orb--one"></div>
+  <div class="auth-orb auth-orb--two"></div>
+
+  <div class="auth-shell">
+    <aside class="auth-hero">
+      <div class="brand">
+        <div class="brand__mark">SM</div>
+        <div>
+          <strong>Student Management</strong>
+          <span>College ERP</span>
+        </div>
+      </div>
+
+      <div class="hero-copy">
+        <span class="hero-pill">Secure campus portal</span>
+        <h1>Manage college records from one clean workspace.</h1>
+        <p>Admins, teachers, and students can sign in with their assigned account to access role-based features.</p>
+      </div>
+
+      <div class="role-grid">
+        <div>
+          <strong>Admin</strong>
+          <span>Students, teachers, records</span>
+        </div>
+        <div>
+          <strong>Teacher</strong>
+          <span>Students and attendance</span>
+        </div>
+        <div>
+          <strong>Student</strong>
+          <span>Profile and attendance</span>
+        </div>
+      </div>
+    </aside>
+
+    <mat-card class="auth-card">
+      <div class="auth-header">
+        <div class="auth-badge">SM</div>
+        <span class="auth-kicker">Welcome back</span>
+        <h2>Sign in to your account</h2>
+        <p>Use the email and password created by the college administrator.</p>
+      </div>
+
+      <form [formGroup]="form" (ngSubmit)="submit()" class="form">
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" type="email" autocomplete="email" placeholder="you@example.com">
+          <mat-error *ngIf="form.controls.email.hasError('required')">Email is required</mat-error>
+          <mat-error *ngIf="form.controls.email.hasError('email')">Enter a valid email</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            formControlName="password"
+            [type]="showPassword ? 'text' : 'password'"
+            autocomplete="current-password"
+            placeholder="Minimum 8 characters"
+          >
+          <button
+            mat-icon-button
+            matIconSuffix
+            class="password-toggle"
+            type="button"
+            [attr.aria-label]="showPassword ? 'Hide password' : 'Show password'"
+            (click)="showPassword = !showPassword"
+          >
+            <svg *ngIf="!showPassword" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M2.25 12s3.75-6.75 9.75-6.75S21.75 12 21.75 12 18 18.75 12 18.75 2.25 12 2.25 12Z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+            <svg *ngIf="showPassword" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M2.25 12s3.75-6.75 9.75-6.75S21.75 12 21.75 12 18 18.75 12 18.75 2.25 12 2.25 12Z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+              <path d="M4 4l16 16"></path>
+            </svg>
+          </button>
+          <mat-error *ngIf="form.controls.password.hasError('required')">Password is required</mat-error>
+          <mat-error *ngIf="form.controls.password.hasError('minlength')">Password must be at least 8 characters</mat-error>
+        </mat-form-field>
+
+        <p class="error" *ngIf="loginError">{{ loginError }}</p>
+
+        <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid || loading">
+          {{ loading ? 'Signing in...' : 'Login' }}
+        </button>
+      </form>
+
+      <div class="auth-note">
+        <strong>Need access?</strong>
+        <span>Ask your college administrator to create your account.</span>
+      </div>
+    </mat-card>
+  </div>
+</section>

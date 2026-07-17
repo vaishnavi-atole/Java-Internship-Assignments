@@ -1,0 +1,14 @@
+.page-head { display:flex; justify-content:space-between; align-items:center; gap: 16px; margin-bottom: 20px; }
+.page-head h1 { margin:0; font-size: 32px; color:#0f172a; }
+.page-head p { margin:6px 0 0; color:#64748b; }
+.table-card { border-radius: 24px; padding: 0; overflow: hidden; }
+.table-wrap { overflow-x:auto; }
+table { width: 100%; }
+td, th { white-space: nowrap; }
+.role-chip {
+  display:inline-flex; align-items:center; padding: 6px 12px; border-radius: 999px;
+  background: #e0e7ff; color: #3730a3; font-weight: 700; font-size: 12px;
+}
+button { min-width: 110px; }
+.loading, .empty-state { min-height: 220px; display:grid; place-items:center; color:#64748b; }
+@media (max-width: 768px) { .page-head { align-items:flex-start; flex-direction:column; } }

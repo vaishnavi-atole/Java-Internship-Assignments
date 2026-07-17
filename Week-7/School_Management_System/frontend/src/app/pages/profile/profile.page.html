@@ -1,0 +1,121 @@
+<div class="page-head">
+  <div>
+    <span class="eyebrow">Account center</span>
+    <h1>Profile</h1>
+    <p>Everything important about the current logged-in account.</p>
+  </div>
+</div>
+
+<div class="profile-shell" *ngIf="user; else loadingState">
+  <mat-card class="hero-card">
+    <div class="hero-card__glow"></div>
+    <div class="profile-avatar">{{ initials }}</div>
+    <div class="profile-info">
+      <span class="role-chip" [class.role-chip--admin]="user.role === 'ADMIN'" [class.role-chip--teacher]="user.role === 'TEACHER'" [class.role-chip--student]="user.role === 'STUDENT'">{{ user.role }}</span>
+      <h2>{{ user.name }}</h2>
+      <p>{{ roleDescription }}</p>
+      <div class="contact-row">
+        <span>{{ user.email }}</span>
+        <span>Account #{{ user.id }}</span>
+      </div>
+    </div>
+  </mat-card>
+
+  <section class="profile-grid">
+    <mat-card class="info-card">
+      <h3>Account information</h3>
+      <div class="detail-list">
+        <div class="detail-item">
+          <span>Name</span>
+          <strong>{{ user.name }}</strong>
+        </div>
+        <div class="detail-item">
+          <span>Email</span>
+          <strong>{{ user.email }}</strong>
+        </div>
+        <div class="detail-item">
+          <span>Role</span>
+          <strong>{{ user.role }}</strong>
+        </div>
+        <div class="detail-item">
+          <span>Access level</span>
+          <strong>{{ accessLevel }}</strong>
+        </div>
+      </div>
+    </mat-card>
+
+    <mat-card class="actions-card">
+      <h3>Quick actions</h3>
+      <p>Jump to the pages available for this login.</p>
+      <div class="action-list">
+        <a mat-stroked-button routerLink="/dashboard">Dashboard</a>
+        <a mat-stroked-button routerLink="/students" *ngIf="user.role === 'ADMIN' || user.role === 'TEACHER'">Students</a>
+        <a mat-stroked-button routerLink="/admin/teachers" *ngIf="user.role === 'ADMIN'">Teachers</a>
+        <a mat-stroked-button routerLink="/my-details" *ngIf="user.role === 'STUDENT'">My Details</a>
+        <a mat-stroked-button routerLink="/my-attendance" *ngIf="user.role === 'STUDENT'">My Attendance</a>
+        <button mat-flat-button color="warn" (click)="logout()">Logout</button>
+      </div>
+    </mat-card>
+  </section>
+
+  <mat-card class="student-card" *ngIf="user.role === 'STUDENT' && student">
+    <div class="student-card__head">
+      <div>
+        <h3>Student details</h3>
+        <p>Linked academic profile for this account.</p>
+      </div>
+      <span class="student-id">{{ student.studentId }}</span>
+    </div>
+
+    <div class="student-grid">
+      <div class="detail-item">
+        <span>Full name</span>
+        <strong>{{ student.firstName }} {{ student.lastName }}</strong>
+      </div>
+      <div class="detail-item">
+        <span>Phone</span>
+        <strong>{{ student.phone }}</strong>
+      </div>
+      <div class="detail-item">
+        <span>Department</span>
+        <strong>{{ student.department }}</strong>
+      </div>
+      <div class="detail-item">
+        <span>Course</span>
+        <strong>{{ student.course }}</strong>
+      </div>
+      <div class="detail-item">
+        <span>Semester</span>
+        <strong>{{ student.semester }}</strong>
+      </div>
+      <div class="detail-item">
+        <span>Section</span>
+        <strong>{{ student.section }}</strong>
+      </div>
+      <div class="detail-item">
+        <span>Date of birth</span>
+        <strong>{{ student.dateOfBirth ? (student.dateOfBirth | date:'mediumDate') : '—' }}</strong>
+      </div>
+      <div class="detail-item">
+        <span>Gender</span>
+        <strong>{{ student.gender }}</strong>
+      </div>
+      <div class="detail-item detail-item--wide">
+        <span>Address</span>
+        <strong>{{ student.address }}</strong>
+      </div>
+    </div>
+  </mat-card>
+
+  <mat-card class="student-card muted" *ngIf="user.role === 'STUDENT' && studentLoading">
+    Loading linked student details...
+  </mat-card>
+
+  <mat-card class="student-card muted" *ngIf="user.role === 'STUDENT' && !studentLoading && !student">
+    No student record is linked to this account yet.
+  </mat-card>
+</div>
+
+<ng-template #loadingState>
+  <mat-card class="profile-card loading">Loading profile...</mat-card>
+</ng-template>

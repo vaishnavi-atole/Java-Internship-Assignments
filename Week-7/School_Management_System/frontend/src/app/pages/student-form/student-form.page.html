@@ -1,0 +1,182 @@
+<div class="page-head">
+  <div>
+    <span class="eyebrow">Admin workspace</span>
+    <h1>{{ isEditMode ? 'Edit Student' : 'Add Student' }}</h1>
+    <p>{{ isEditMode ? 'Update student profile, academic details, and login access.' : 'Create a complete student profile with login access.' }}</p>
+  </div>
+</div>
+
+<section class="form-layout">
+  <mat-card class="form-card">
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <section class="form-section">
+        <div class="section-head">
+          <span class="section-step">1</span>
+          <div>
+            <h2>Personal information</h2>
+            <p>Basic identity and contact details.</p>
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <mat-form-field appearance="outline">
+            <mat-label>First Name</mat-label>
+            <input matInput formControlName="firstName">
+            <mat-error *ngIf="form.controls.firstName.hasError('required')">First name is required</mat-error>
+            <mat-error *ngIf="form.controls.firstName.hasError('minlength')">Minimum 2 characters</mat-error>
+            <mat-error *ngIf="form.controls.firstName.hasError('maxlength')">Maximum 100 characters</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Last Name</mat-label>
+            <input matInput formControlName="lastName">
+            <mat-error *ngIf="form.controls.lastName.hasError('required')">Last name is required</mat-error>
+            <mat-error *ngIf="form.controls.lastName.hasError('minlength')">Minimum 2 characters</mat-error>
+            <mat-error *ngIf="form.controls.lastName.hasError('maxlength')">Maximum 100 characters</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" type="email">
+            <mat-error *ngIf="form.controls.email.hasError('required')">Email is required</mat-error>
+            <mat-error *ngIf="form.controls.email.hasError('email')">Enter a valid email</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Phone</mat-label>
+            <input matInput formControlName="phone" placeholder="Example: 9876543210">
+            <mat-error *ngIf="form.controls.phone.hasError('required')">Phone is required</mat-error>
+            <mat-error *ngIf="form.controls.phone.hasError('pattern')">Enter 7–20 digits/symbols only</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Gender</mat-label>
+            <mat-select formControlName="gender">
+              <mat-option value="MALE">Male</mat-option>
+              <mat-option value="FEMALE">Female</mat-option>
+              <mat-option value="OTHER">Other</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Date of Birth</mat-label>
+            <input matInput [matDatepicker]="dobPicker" [max]="maxDate" formControlName="dateOfBirth" placeholder="Choose or type date">
+            <mat-hint>Pick from calendar or type manually as dd/mm/yyyy</mat-hint>
+            <mat-error *ngIf="form.controls.dateOfBirth.hasError('matDatepickerMax')">Date cannot be in the future</mat-error>
+            <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
+            <mat-datepicker #dobPicker></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Address</mat-label>
+            <textarea matInput rows="4" formControlName="address"></textarea>
+            <mat-error *ngIf="form.controls.address.hasError('required')">Address is required</mat-error>
+            <mat-error *ngIf="form.controls.address.hasError('maxlength')">Maximum 1000 characters</mat-error>
+          </mat-form-field>
+        </div>
+      </section>
+
+      <section class="form-section">
+        <div class="section-head">
+          <span class="section-step">2</span>
+          <div>
+            <h2>Academic details</h2>
+            <p>Department, course, semester, and class section.</p>
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <mat-form-field appearance="outline">
+            <mat-label>Department</mat-label>
+            <input matInput formControlName="department">
+            <mat-error *ngIf="form.controls.department.hasError('required')">Department is required</mat-error>
+            <mat-error *ngIf="form.controls.department.hasError('maxlength')">Maximum 100 characters</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Course</mat-label>
+            <input matInput formControlName="course">
+            <mat-error *ngIf="form.controls.course.hasError('required')">Course is required</mat-error>
+            <mat-error *ngIf="form.controls.course.hasError('maxlength')">Maximum 100 characters</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Semester</mat-label>
+            <input matInput formControlName="semester" placeholder="Example: 2">
+            <mat-error *ngIf="form.controls.semester.hasError('required')">Semester is required</mat-error>
+            <mat-error *ngIf="form.controls.semester.hasError('pattern')">Enter a number from 1 to 99</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Section</mat-label>
+            <input matInput formControlName="section" placeholder="Example: A">
+            <mat-error *ngIf="form.controls.section.hasError('required')">Section is required</mat-error>
+            <mat-error *ngIf="form.controls.section.hasError('pattern')">Use letters, numbers, or hyphen only</mat-error>
+          </mat-form-field>
+        </div>
+      </section>
+
+      <section class="form-section">
+        <div class="section-head">
+          <span class="section-step">3</span>
+          <div>
+            <h2>Login access</h2>
+            <p>{{ isEditMode ? 'Optionally set a new password for this student.' : 'Create the password used with the student email.' }}</p>
+          </div>
+        </div>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>{{ isEditMode ? 'New login password (optional)' : 'Login password' }}</mat-label>
+          <input
+            matInput
+            [type]="showLoginPassword ? 'text' : 'password'"
+            formControlName="loginPassword"
+            autocomplete="new-password"
+          >
+          <button
+            mat-icon-button
+            matIconSuffix
+            class="password-toggle"
+            type="button"
+            [attr.aria-label]="showLoginPassword ? 'Hide student password' : 'Show student password'"
+            (click)="showLoginPassword = !showLoginPassword"
+          >
+            <svg *ngIf="!showLoginPassword" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M2.25 12s3.75-6.75 9.75-6.75S21.75 12 21.75 12 18 18.75 12 18.75 2.25 12 2.25 12Z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+            <svg *ngIf="showLoginPassword" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M2.25 12s3.75-6.75 9.75-6.75S21.75 12 21.75 12 18 18.75 12 18.75 2.25 12 2.25 12Z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+              <path d="M4 4l16 16"></path>
+            </svg>
+          </button>
+          <mat-hint>Minimum 8 characters with at least one letter and one number.</mat-hint>
+          <mat-error *ngIf="form.controls.loginPassword.hasError('required')">Login password is required</mat-error>
+          <mat-error *ngIf="form.controls.loginPassword.hasError('pattern')">Use 8+ characters with a letter and a number</mat-error>
+        </mat-form-field>
+      </section>
+
+      <div class="form-error" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+      <div class="actions">
+        <button mat-stroked-button routerLink="/students">Cancel</button>
+        <button mat-flat-button color="primary" type="submit" [disabled]="loading">
+          {{ loading ? 'Saving...' : (isEditMode ? 'Update Student' : 'Create Student') }}
+        </button>
+      </div>
+    </form>
+  </mat-card>
+
+  <aside class="side-panel">
+    <mat-card class="summary-card">
+      <div class="summary-badge">{{ isEditMode ? 'Edit' : 'New' }}</div>
+      <h2>{{ isEditMode ? 'Update safely' : 'Student account setup' }}</h2>
+      <p>{{ isEditMode ? 'Changes update both the student record and linked login account.' : 'A student profile and login account will be created together.' }}</p>
+      <div class="summary-list">
+        <span>Required fields are marked with *</span>
+        <span>Email must be unique</span>
+        <span>Password must be at least 8 characters</span>
+      </div>
+    </mat-card>
+  </aside>
+</section>

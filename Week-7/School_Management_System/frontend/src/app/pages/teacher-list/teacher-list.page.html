@@ -1,0 +1,57 @@
+<div class="page-head">
+  <div>
+    <h1>Teachers</h1>
+    <p>View existing teacher accounts and create new teacher logins.</p>
+  </div>
+  <button mat-flat-button color="primary" routerLink="/admin/teachers/new">
+    Create Teacher
+  </button>
+</div>
+
+<mat-card class="table-card">
+  <div class="table-wrap" *ngIf="teachers; else loadingState">
+    <table mat-table [dataSource]="teachers">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let row">{{ row.id }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef>Email</th>
+        <td mat-cell *matCellDef="let row">{{ row.email }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="role">
+        <th mat-header-cell *matHeaderCellDef>Role</th>
+        <td mat-cell *matCellDef="let row">
+          <span class="role-chip">{{ row.role }}</span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let row">
+          <button mat-stroked-button color="warn" (click)="deleteTeacher(row)" [disabled]="deletingId === row.id">
+            {{ deletingId === row.id ? 'Deleting...' : 'Delete' }}
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+
+    <div class="empty-state" *ngIf="teachers.length === 0">
+      No teachers created yet.
+    </div>
+  </div>
+
+  <ng-template #loadingState>
+    <div class="loading">Loading teachers...</div>
+  </ng-template>
+</mat-card>

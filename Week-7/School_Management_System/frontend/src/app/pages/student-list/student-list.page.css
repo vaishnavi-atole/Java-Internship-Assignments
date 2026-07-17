@@ -1,0 +1,25 @@
+.page-head { display:flex; justify-content:space-between; align-items:center; gap: 16px; margin-bottom: 20px; }
+.page-head h1 { margin:0; font-size: 32px; color:#0f172a; }
+.page-head p { margin:6px 0 0; color:#64748b; }
+.toolbar-card, .table-card { border-radius: 24px; margin-bottom: 16px; }
+.toolbar-card { padding: 8px 16px; }
+.search-field { width: 100%; }
+.table-wrap { overflow-x:auto; }
+table { width: 100%; }
+.loading { min-height: 280px; display:grid; place-items:center; color:#64748b; }
+td, th { white-space: nowrap; }
+.actions-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 360px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.actions-cell button {
+  min-width: auto;
+  height: 34px;
+  padding: 0 12px;
+  line-height: 34px;
+}
+@media (max-width: 768px) { .page-head { align-items:flex-start; flex-direction:column; } }

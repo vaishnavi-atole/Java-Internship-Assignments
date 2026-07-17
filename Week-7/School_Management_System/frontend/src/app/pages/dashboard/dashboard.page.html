@@ -1,0 +1,143 @@
+<div class="page-head">
+  <div>
+    <span class="eyebrow">{{ roleEyebrow }}</span>
+    <h1>{{ dashboardTitle }}</h1>
+    <p>{{ dashboardSubtitle }}</p>
+  </div>
+</div>
+
+<section class="hero-banner" [class.hero-banner--admin]="role === 'ADMIN'" [class.hero-banner--teacher]="role === 'TEACHER'" [class.hero-banner--student]="role === 'STUDENT'">
+  <div class="hero-orb hero-orb--one"></div>
+  <div class="hero-orb hero-orb--two"></div>
+  <div class="hero-banner__content">
+    <span class="hero-banner__pill">{{ role }} ACCESS</span>
+    <h2>{{ heroTitle }}</h2>
+    <p>{{ heroDescription }}</p>
+    <div class="hero-banner__actions">
+      <a mat-flat-button routerLink="/students" *ngIf="role !== 'STUDENT'">Manage Students</a>
+      <a mat-stroked-button routerLink="/admin/teachers" *ngIf="role === 'ADMIN'">Teachers</a>
+      <a mat-stroked-button routerLink="/admin/teachers/new" *ngIf="role === 'ADMIN'">Create Teacher</a>
+      <a mat-flat-button routerLink="/my-details" *ngIf="role === 'STUDENT'">My Details</a>
+      <a mat-stroked-button routerLink="/my-attendance" *ngIf="role === 'STUDENT'">My Attendance</a>
+      <a mat-stroked-button routerLink="/profile">My Profile</a>
+    </div>
+  </div>
+
+  <div class="hero-card">
+    <div class="hero-card__avatar">{{ userInitials }}</div>
+    <div>
+      <span>Signed in as</span>
+      <strong>{{ currentUserName }}</strong>
+    </div>
+    <div class="hero-card__footer">
+      <span>{{ role }}</span>
+      <small>{{ roleEyebrow }}</small>
+    </div>
+  </div>
+</section>
+
+<section class="quick-grid" *ngIf="role === 'STUDENT'">
+  <mat-card class="quick-card quick-card--details">
+    <span>Profile</span>
+    <h3>My academic details</h3>
+    <p>View your student ID, department, semester, section, and contact details.</p>
+    <a mat-flat-button color="primary" routerLink="/my-details">Open Details</a>
+  </mat-card>
+
+  <mat-card class="quick-card quick-card--attendance">
+    <span>Attendance</span>
+    <h3>My attendance history</h3>
+    <p>Check date-wise present/absent attendance records from your account.</p>
+    <a mat-flat-button color="primary" routerLink="/my-attendance">Open Attendance</a>
+  </mat-card>
+
+  <mat-card class="quick-card">
+    <span>Account</span>
+    <h3>My profile</h3>
+    <p>Review your login account and linked student information.</p>
+    <a mat-stroked-button routerLink="/profile">View Profile</a>
+  </mat-card>
+</section>
+
+<ng-container *ngIf="role !== 'STUDENT'">
+<ng-container *ngIf="stats; else loadingState">
+  <section class="stats-grid" [class.stats-grid--admin]="role === 'ADMIN'">
+    <mat-card class="metric metric--primary">
+      <span>Total Students</span>
+      <strong>{{ stats.totalStudents }}</strong>
+    </mat-card>
+    <mat-card class="metric" *ngIf="role === 'ADMIN'">
+      <span>Total Teachers</span>
+      <strong>{{ stats.totalTeachers }}</strong>
+    </mat-card>
+    <mat-card class="metric">
+      <span>Male Students</span>
+      <strong>{{ stats.maleStudents }}</strong>
+    </mat-card>
+    <mat-card class="metric">
+      <span>Female Students</span>
+      <strong>{{ stats.femaleStudents }}</strong>
+    </mat-card>
+    <mat-card class="metric">
+      <span>Departments</span>
+      <strong>{{ stats.departmentCounts.length }}</strong>
+    </mat-card>
+  </section>
+
+  <section class="dashboard-grid">
+    <mat-card class="panel-card">
+      <div class="panel-head">
+        <div>
+          <span>Distribution</span>
+          <h2>Department Count</h2>
+        </div>
+        <strong>{{ stats.departmentCounts.length }}</strong>
+      </div>
+      <mat-card-content>
+        <div class="department-card" *ngFor="let item of stats.departmentCounts">
+          <div class="department-card__top">
+            <div class="department-card__name">
+              <span class="department-card__avatar">{{ departmentInitial(item.department) }}</span>
+              <div>
+                <strong>{{ item.department }}</strong>
+                <small>{{ departmentPercentage(item.total) }}% of students</small>
+              </div>
+            </div>
+            <span class="department-card__count">{{ item.total }}</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" [style.width.%]="departmentPercentage(item.total)"></div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="panel-card">
+      <div class="panel-head">
+        <div>
+          <span>Latest records</span>
+          <h2>Recent Students</h2>
+        </div>
+        <a mat-stroked-button routerLink="/students">View all</a>
+      </div>
+      <mat-card-content>
+        <div class="student-row" *ngFor="let student of stats.recentStudents">
+          <div class="student-row__avatar">{{ studentInitials(student.firstName, student.lastName) }}</div>
+          <div class="student-row__info">
+            <strong>{{ student.firstName }} {{ student.lastName }}</strong>
+            <span>{{ student.department }} · {{ student.course }}</span>
+          </div>
+          <span class="student-row__id">{{ student.studentId }}</span>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </section>
+</ng-container>
+</ng-container>
+
+<ng-template #loadingState>
+  <div class="loading-card">
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+    <p>Loading dashboard statistics...</p>
+  </div>
+</ng-template>

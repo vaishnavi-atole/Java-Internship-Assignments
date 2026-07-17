@@ -1,0 +1,166 @@
+<div class="page-head">
+  <div>
+    <span class="eyebrow">{{ isStudent ? 'Student record' : 'Teacher workspace' }}</span>
+    <h1>Attendance</h1>
+    <p>{{ isStudent ? 'Your date-wise attendance history and daily status overview.' : 'Mark attendance date-wise and review this student’s history.' }}</p>
+  </div>
+  <a mat-stroked-button routerLink="/students" *ngIf="!isStudent">Back to students</a>
+</div>
+
+<section class="attendance-layout">
+  <mat-card class="mark-card" *ngIf="isTeacher">
+    <div class="card-title">
+      
+      <div>
+        <h2>Mark attendance</h2>
+        <p>Select a date and mark the student as present or absent.</p>
+      </div>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="save()" class="mark-form">
+      <div class="form-top-row">
+        <mat-form-field appearance="outline" class="date-field">
+          <mat-label>Date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="attendancePicker"
+            [max]="maxAttendanceDate"
+            formControlName="date"
+            placeholder="Choose attendance date"
+          >
+          <mat-datepicker-toggle matIconSuffix [for]="attendancePicker"></mat-datepicker-toggle>
+          <mat-datepicker #attendancePicker></mat-datepicker>
+
+          <mat-error *ngIf="form.controls.date.hasError('required') && !form.controls.date.hasError('matDatepickerParse') && !form.controls.date.hasError('invalidDate')">
+            Date is required
+          </mat-error>
+          <mat-error *ngIf="(form.controls.date.hasError('matDatepickerMax') || form.controls.date.hasError('futureDate')) && !form.controls.date.hasError('matDatepickerParse') && !form.controls.date.hasError('invalidDate')">
+            Future dates are not allowed
+          </mat-error>
+          <mat-error *ngIf="form.controls.date.hasError('matDatepickerParse') || form.controls.date.hasError('invalidDate')">
+            Enter a valid date
+          </mat-error>
+        </mat-form-field>
+
+        <div class="status-toggle-field">
+          <label>Status*</label>
+          <div class="status-toggle" role="radiogroup" aria-label="Attendance status">
+            <button
+              type="button"
+              class="status-choice status-choice--present"
+              [class.is-active]="form.controls.status.value === 'PRESENT'"
+              [attr.aria-checked]="form.controls.status.value === 'PRESENT'"
+              role="radio"
+              (click)="form.controls.status.setValue('PRESENT')"
+            >
+              
+              <span>
+                <strong>Present</strong>
+                <small>Student attended</small>
+              </span>
+            </button>
+
+            <button
+              type="button"
+              class="status-choice status-choice--absent"
+              [class.is-active]="form.controls.status.value === 'ABSENT'"
+              [attr.aria-checked]="form.controls.status.value === 'ABSENT'"
+              role="radio"
+              (click)="form.controls.status.setValue('ABSENT')"
+            >
+             
+              <span>
+                <strong>Absent</strong>
+                <small>Student missed</small>
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <mat-form-field appearance="outline" class="remarks-field">
+        <mat-label>Remarks</mat-label>
+        <textarea matInput formControlName="remarks" rows="4" placeholder="Optional note"></textarea>
+        <mat-hint align="end">{{ form.controls.remarks.value.length }}/500</mat-hint>
+        <mat-error *ngIf="form.controls.remarks.hasError('maxlength')">Maximum 500 characters</mat-error>
+      </mat-form-field>
+
+      <button class="submit-button" mat-flat-button color="primary" type="submit" [disabled]="form.invalid || saving">
+     
+        {{ saving ? 'Saving...' : 'Mark Attendance' }}
+      </button>
+
+      <p class="date-note">
+        
+        <span>Select a different date to create another attendance record. Marking the same date again updates that day's attendance.</span>
+      </p>
+    </form>
+  </mat-card>
+
+  <mat-card class="summary-card">
+    <h2>Overview</h2>
+    <p class="summary-card__subtitle">Date-wise count from the loaded records.</p>
+    <div class="stats-grid">
+      <div class="stat stat--present">
+        <span>{{ countByStatus('PRESENT') }}</span>
+        <small>Present</small>
+      </div>
+      <div class="stat stat--absent">
+        <span>{{ countByStatus('ABSENT') }}</span>
+        <small>Absent</small>
+      </div>
+      <div class="stat stat--total">
+        <span>{{ records.length }}</span>
+        <small>Total days</small>
+      </div>
+      <div class="stat stat--rate">
+        <span>{{ attendancePercentage }}%</span>
+        <small>Attendance</small>
+      </div>
+    </div>
+  </mat-card>
+</section>
+
+<mat-card class="history-card">
+  <div class="history-head">
+    <div>
+      <h2>Attendance history</h2>
+      <p>{{ records.length }} date-wise record{{ records.length === 1 ? '' : 's' }} found</p>
+    </div>
+  </div>
+
+  <div class="empty" *ngIf="loaded && !records.length">
+    <div class="empty__icon">✓</div>
+    <h3>No attendance recorded yet</h3>
+    <p>Each selected date will appear here as its own record.</p>
+  </div>
+
+  <table mat-table [dataSource]="records" *ngIf="records.length" class="attendance-table">
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef>Date</th>
+      <td mat-cell *matCellDef="let row">{{ row.date | date:'mediumDate' }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef>Status</th>
+      <td mat-cell *matCellDef="let row">
+        <span class="status-pill" [class.status-pill--present]="row.status === 'PRESENT'" [class.status-pill--absent]="row.status === 'ABSENT'">
+          {{ displayStatus(row.status) }}
+        </span>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="remarks">
+      <th mat-header-cell *matHeaderCellDef>Remarks</th>
+      <td mat-cell *matCellDef="let row" class="remarks-cell">{{ row.remarks || '—' }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="markedBy">
+      <th mat-header-cell *matHeaderCellDef>Marked by</th>
+      <td mat-cell *matCellDef="let row">{{ row.markedBy || '—' }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columns"></tr>
+    <tr mat-row *matRowDef="let row; columns: columns"></tr>
+  </table>
+</mat-card>

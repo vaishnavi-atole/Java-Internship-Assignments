@@ -1,0 +1,39 @@
+.dialog-shell {
+  min-width: min(420px, 88vw);
+  padding-top: 8px;
+}
+
+.dialog-icon {
+  width: 44px;
+  height: 44px;
+  margin: 0 24px 4px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  background: #fee2e2;
+  color: #b91c1c;
+  font-weight: 900;
+  font-size: 22px;
+}
+
+h2 {
+  margin: 0;
+  color: #0f172a;
+  font-weight: 900;
+}
+
+p {
+  margin: 0;
+  color: #64748b;
+  line-height: 1.55;
+}
+
+mat-dialog-actions {
+  gap: 10px;
+  padding-top: 18px;
+}
+
+button {
+  min-width: 100px;
+  border-radius: 12px;
+}
