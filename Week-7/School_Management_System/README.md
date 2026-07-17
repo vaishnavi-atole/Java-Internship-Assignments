@@ -1,167 +1,195 @@
-# Student Management System
+# School Management System
 
-A full-stack College Student Management System built from scratch with a Spring Boot backend and an Angular frontend.
+A full-stack School Management System built using Spring Boot and Angular to streamline student, teacher, attendance, and administrative management.
 
 ## Project Overview
 
 This repository contains:
 
-- `backend/` - Spring Boot 3.x, Java 21, Spring Security, JWT, Spring Data JPA, Hibernate, MySQL, Lombok, Bean Validation
-- `frontend/` - Angular 20 standalone application with Angular Material, reactive forms, JWT authentication, route guards, and HTTP interceptors
+* `backend/` - Spring Boot, Spring Security, JWT Authentication, Spring Data JPA, Hibernate, MySQL, Maven
+* `frontend/` - Angular application with reactive forms, route guards, HTTP interceptors, and responsive UI
 
 The system supports:
 
-- Administrator, teacher, and student login
-- JWT-based authentication
-- Role-based access control for `ADMIN`, `TEACHER`, and `STUDENT`
-- Admin-managed student accounts and records
-- Teacher-managed attendance
-- Student-only access to their own details and attendance
-- Search, pagination, and sorting
-- Dashboard statistics and recent student widgets
-- Responsive ERP-style UI
+* Administrator login and management
+* Teacher management
+* Student management
+* Attendance tracking
+* JWT-based authentication
+* Role-based authorization
+* Search, pagination, and sorting
+* Dashboard and reporting features
+* Responsive user interface
 
 ## Folder Structure
 
 ```text
-Student_Management_System/
+School_Management_System/
 ├── backend/
-│   └── src/main/java/com/studentmanagement/
+│   └── src/main/java/com/example/
 │       ├── controller/
 │       ├── service/
 │       ├── repository/
 │       ├── entity/
 │       ├── dto/
-│       ├── security/
 │       ├── config/
+│       ├── security/
 │       ├── exception/
-│       ├── util/
-│       └── mapper/
+│       └── util/
+│
 └── frontend/
     └── src/app/
         ├── components/
-        ├── pages/
-        ├── layout/
         ├── services/
         ├── guards/
         ├── interceptors/
         ├── models/
-        └── shared/
+        └── pages/
 ```
 
-## Installation Steps
+## Technologies Used
 
-### Prerequisites
+### Backend
 
-- Java 21
-- Maven 3.9+
-- Node.js 20+
-- Angular CLI 20
-- MySQL 8+
+* Java 17+
+* Spring Boot
+* Spring Security
+* JWT Authentication
+* Spring Data JPA
+* Hibernate
+* MySQL
+* Maven
+* Lombok
+
+### Frontend
+
+* Angular
+* TypeScript
+* HTML
+* CSS
+* Bootstrap
+
+## Prerequisites
+
+Before running the project, ensure the following software is installed:
+
+* Java 17 or later
+* Maven
+* MySQL Server
+* Node.js
+* Angular CLI
 
 ## Backend Setup
 
-1. Open a terminal in `backend/`.
-2. Set `DB_USERNAME` and `DB_PASSWORD`, or update their defaults in `src/main/resources/application.yml`.
-3. Make sure the database `student_management` exists, or allow MySQL to create it.
-4. Run the backend:
+1. Navigate to the backend folder.
+2. Create a MySQL database.
+3. Configure database credentials in `application.properties`.
+4. Run the application:
 
 ```bash
 mvn spring-boot:run
 ```
 
-The backend runs on `http://localhost:8080`.
+Backend URL:
+
+```text
+http://localhost:8080
+```
 
 ## Frontend Setup
 
-1. Open a terminal in `frontend/`.
+1. Navigate to the frontend folder.
 2. Install dependencies:
 
 ```bash
 npm install
 ```
 
-3. Start the Angular app:
+3. Start the Angular application:
 
 ```bash
-npm start
+ng serve
 ```
 
-The frontend runs on `http://localhost:4200`.
+Frontend URL:
 
-## Database Setup
+```text
+http://localhost:4200
+```
 
-The SQL schema is available at:
+## Database Configuration
 
-- `backend/src/main/resources/schema.sql`
+Database Name:
 
-Database name:
+```text
+school_management
+```
 
-- `student_management`
+Update the following properties:
 
-Tables:
+```properties
+spring.datasource.url=jdbc:mysql://localhost:3306/school_management
+spring.datasource.username=root
+spring.datasource.password=your_password
+```
 
-- `users`
-- `students`
-- `attendance`
+## User Roles
 
-## Roles and first login
+### ADMIN
 
-- `ADMIN` creates teacher accounts and student records. Creating a student also creates the student's login account.
-- `TEACHER` can view students and mark or update attendance.
-- `STUDENT` can view only their own student record and attendance.
+* Manage students
+* Manage teachers
+* View reports
+* Monitor attendance
 
-On the first backend startup, a development admin is created when no admin exists:
+### TEACHER
 
-- Email: `admin@college.com`
-- Password: `Admin@123`
+* View assigned students
+* Mark attendance
+* Update attendance records
 
-Override these with `APP_ADMIN_EMAIL`, `APP_ADMIN_PASSWORD`, and `APP_ADMIN_NAME`. Change the defaults before deploying.
+### STUDENT
+
+* View personal profile
+* View attendance history
 
 ## API Endpoints
 
 ### Authentication
 
-- `POST /api/auth/login`
-- `GET /api/auth/me`
-- `POST /api/auth/admin/teachers` - ADMIN only
+* POST `/api/auth/login`
+* POST `/api/auth/register`
 
 ### Students
 
-- `GET /api/students`
-- `GET /api/students/{id}`
-- `GET /api/students/me` - STUDENT only
-- `POST /api/students` - ADMIN only
-- `PUT /api/students/{id}` - ADMIN only
-- `DELETE /api/students/{id}` - ADMIN only
+* GET `/api/students`
+* GET `/api/students/{id}`
+* POST `/api/students`
+* PUT `/api/students/{id}`
+* DELETE `/api/students/{id}`
+
+### Teachers
+
+* GET `/api/teachers`
+* POST `/api/teachers`
+* PUT `/api/teachers/{id}`
+* DELETE `/api/teachers/{id}`
 
 ### Attendance
 
-- `GET /api/attendance/students/{studentId}` - ADMIN or TEACHER
-- `PUT /api/attendance/students/{studentId}` - TEACHER only
-- `GET /api/attendance/me` - STUDENT only
+* GET `/api/attendance`
+* POST `/api/attendance`
+* PUT `/api/attendance/{id}`
 
-### Dashboard
+## Future Enhancements
 
-- `GET /api/dashboard/stats`
+* Online Fee Management
+* Examination Module
+* Email Notifications
+* Student Performance Analytics
+* Parent Portal
+* Report Generation
 
-## Screenshots Placeholder
+## Author
 
-Add your screenshots here after running the application:
-
-- Login page
-- Register page
-- Dashboard
-- Student list
-- Add student form
-- Edit student form
-- Student details page
-- Profile page
-
-## Notes
-
-- JWT is stored in browser local storage.
-- The Angular interceptor automatically attaches the token to API requests.
-- Expired or invalid tokens are cleared and the user is redirected to login.
-- Public registration is disabled; accounts are provisioned by an administrator.
-- The backend enforces ownership for student self-service endpoints.
+**Vaishnavi Rajaram Atole**
