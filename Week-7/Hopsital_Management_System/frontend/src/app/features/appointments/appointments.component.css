@@ -1,0 +1,31 @@
+.appointment-workspace { align-items: start; }
+.appointment-form { max-height: calc(100vh - 150px); overflow: auto; }
+.form-section { margin-bottom: .9rem; padding: .85rem .85rem .15rem; border: 1px solid var(--line); border-radius: 14px; background: var(--surface-soft); }
+.form-section > span { display: block; margin: 0 0 .55rem .1rem; color: var(--primary); font-size: .68rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.form-section .mat-mdc-form-field { margin-bottom: 0; }
+.save-appointment { display: inline-flex; min-height: 44px; align-items: center; gap: .4rem; font-weight: 800; }
+.save-appointment .material-icons { font-size: 18px; }
+.directory-header { display: flex; align-items: start; justify-content: space-between; gap: 1rem; padding: .35rem .35rem 1rem; }
+.directory-header h5 { margin: .25rem 0; color: var(--ink); font-size: 1.2rem; font-weight: 800; }
+.directory-header p { margin: 0; color: var(--muted); font-size: .78rem; }
+.appointment-directory .table-responsive { margin: 0 .15rem .15rem; border: 1px solid var(--line); border-radius: 16px; }
+.appointment-directory .table { min-width: 900px; margin: 0; table-layout: fixed; }
+.appointment-directory th { padding: 1rem 1.15rem; border-bottom: 1px solid var(--line); color: var(--muted); font-size: .68rem; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; white-space: nowrap; }
+.appointment-directory td { padding: 1.15rem; vertical-align: middle; border-color: var(--line); color: var(--ink); }
+.appointment-directory th:nth-child(1), .appointment-directory td:nth-child(1) { width: 24%; }
+.appointment-directory th:nth-child(2), .appointment-directory td:nth-child(2) { width: 24%; }
+.appointment-directory th:nth-child(3), .appointment-directory td:nth-child(3) { width: 20%; }
+.appointment-directory th:nth-child(4), .appointment-directory td:nth-child(4) { width: 16%; }
+.appointment-directory th:nth-child(5), .appointment-directory td:nth-child(5) { width: 16%; }
+.appointment-directory td strong { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: .93rem; }
+.appointment-directory td small { margin-top: .25rem; color: var(--muted)!important; font-size: .74rem; }
+.appointment-directory td:nth-child(3), .appointment-directory td:nth-child(3) small { white-space: nowrap; }
+.appointment-directory td:nth-child(4) .badge { display: inline-flex; padding: .42rem .65rem; border-radius: 999px; font-size: .67rem; letter-spacing: .06em; }
+.appointment-directory td:last-child button { min-width: 0; padding: .2rem .35rem; font-weight: 700; }
+.visit-reason { display: block; margin-top: .45rem; max-width: 240px; color: var(--muted); font-size: .76rem; line-height: 1.35; white-space: normal; }
+.completion-toggle { display: block; margin-bottom: .55rem; font-size: .78rem; font-weight: 750; }
+.prescription-action { display: inline-flex; align-items: center; gap: .35rem; border-color: var(--primary)!important; color: var(--primary)!important; font-size: .72rem; font-weight: 800; }
+.prescription-action .material-icons { font-size: 16px; }
+.appointment-empty { min-height: 380px; }
+@media (max-width: 1199px) { .appointment-form { max-height: none; } }
+@media (max-width: 575px) { .form-section { padding-inline: .65rem; } .directory-header p { display: none; } .appointment-directory .table { min-width: 760px; } }

@@ -1,0 +1,32 @@
+<div class="app-shell">
+  <aside class="sidebar" [class.sidebar--closed]="!sidebarOpen()">
+    <a class="brand" [routerLink]="authService.dashboardRoute()" aria-label="HospitalCare dashboard">
+      <span class="brand-mark"><span class="material-icons">local_hospital</span></span>
+      <span class="brand-copy"><strong>HospitalCare</strong><small>Clinical operations</small></span>
+    </a>
+    <p class="nav-label">Workspace</p>
+    <nav class="sidebar-nav" aria-label="Main navigation">
+      <a *ngFor="let item of visibleNavigation" class="sidebar-link" [routerLink]="item.link" routerLinkActive="active">
+        <span class="material-icons">{{ item.icon }}</span><span>{{ item.label }}</span>
+      </a>
+    </nav>
+    <div class="sidebar-support"><span class="material-icons">verified_user</span><span>Secure clinical workspace</span></div>
+  </aside>
+  <div class="app-content">
+    <header class="topbar">
+      <div class="topbar-start">
+        <button mat-icon-button class="icon-button" (click)="toggleSidebar()" aria-label="Toggle navigation"><span class="material-icons">menu</span></button>
+        <div class="page-context"><span class="section-eyebrow">HospitalCare</span><strong>Operations workspace</strong></div>
+      </div>
+      <div class="topbar-actions">
+        <button mat-icon-button class="icon-button" (click)="goToSearch()" aria-label="Search"><span class="material-icons">search</span></button>
+        <button mat-icon-button class="icon-button" aria-label="Notifications"><span class="material-icons">notifications_none</span></button>
+        <button mat-icon-button class="icon-button" (click)="toggleDarkMode()" aria-label="Toggle color theme"><span class="material-icons">{{ isDarkMode() ? 'light_mode' : 'dark_mode' }}</span></button>
+        <div class="user-pill"><span class="user-avatar">{{ currentUser.charAt(0).toUpperCase() }}</span><span class="user-identity"><span class="user-name">{{ currentUser }}</span><small class="user-role">{{ authService.getRole() }}</small></span></div>
+        <button mat-button class="logout-button" (click)="logout()"><span class="material-icons">logout</span><span>Logout</span></button>
+      </div>
+    </header>
+    <main class="workspace"><router-outlet></router-outlet></main>
+    <footer class="app-footer">© 2026 HospitalCare <span>•</span> Built for better clinical coordination</footer>
+  </div>
+</div>

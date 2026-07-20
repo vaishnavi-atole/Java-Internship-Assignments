@@ -1,0 +1,3 @@
+.card { border-radius: 16px; }
+.status-control { display: inline-flex; align-items: center; gap: .45rem; }
+.status-control .mat-mdc-slide-toggle { transform: scale(.82); transform-origin: left center; }

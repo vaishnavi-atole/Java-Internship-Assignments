@@ -1,0 +1,33 @@
+<app-page-header title="Departments" subtitle="Manage clinical departments and leadership" actionLabel="New Department" actionIcon="add"></app-page-header>
+<div class="row g-4">
+  <div class="col-lg-4">
+    <mat-card class="form-panel p-4">
+      <div class="panel-heading"><span class="panel-icon material-icons">domain_add</span><div><span class="section-eyebrow">Department details</span><h5 class="fw-bold mb-0">{{ editingId ? 'Update department' : 'Create department' }}</h5></div></div>
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <mat-form-field appearance="outline" class="w-100 mb-3"><mat-label>Name</mat-label><input matInput formControlName="name" /></mat-form-field>
+        <mat-form-field appearance="outline" class="w-100 mb-3"><mat-label>Description</mat-label><textarea matInput formControlName="description"></textarea></mat-form-field>
+        <mat-form-field appearance="outline" class="w-100 mb-3"><mat-label>Department Head</mat-label><input matInput formControlName="departmentHead" /></mat-form-field>
+        <div class="mt-3"><button mat-raised-button color="primary" type="submit">{{ editingId ? 'Update department' : 'Save department' }}</button></div>
+      </form>
+    </mat-card>
+  </div>
+  <div class="col-lg-8">
+    <mat-card class="data-panel p-3">
+      <div class="d-flex justify-content-between align-items-center px-1 pb-3"><div><span class="section-eyebrow">Directory</span><h5 class="fw-bold mb-0">Clinical departments</h5></div><span class="badge bg-primary">{{ departments.length }} total</span></div>
+      <div class="table-responsive">
+        <table class="table align-middle">
+          <thead><tr><th>Name</th><th>Head</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody *ngIf="departments.length; else noDepartments">
+            <tr *ngFor="let item of departments">
+              <td>{{ item.name }}</td>
+              <td>{{ item.departmentHead }}</td>
+              <td><div class="status-control"><span class="badge bg-success" *ngIf="item.active">Active</span><span class="badge bg-secondary" *ngIf="!item.active">Inactive</span><mat-slide-toggle [checked]="item.active" (change)="toggleStatus(item)" [attr.aria-label]="item.active ? 'Set department inactive' : 'Set department active'"></mat-slide-toggle></div></td>
+              <td><button mat-button color="primary" (click)="edit(item)">Edit</button><button mat-button color="warn" (click)="delete(item)">Delete</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <ng-template #noDepartments><div class="empty-state"><span class="material-icons">domain_disabled</span><strong>No departments yet</strong><span>Create your first clinical department to get started.</span></div></ng-template>
+    </mat-card>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+<app-page-header
+  title="Appointments"
+  [subtitle]="isDoctor() ? 'Review your consultations and complete each patient checkup' : 'Choose the right provider, patient and available time slot'"
+  [actionLabel]="isDoctor() ? '' : 'Book Appointment'"
+  actionIcon="event">
+</app-page-header>
+
+<div class="row g-4 appointment-workspace">
+  <div class="col-xl-5 col-lg-6">
+    <mat-card class="form-panel appointment-form p-4">
+      <div class="panel-heading">
+        <span class="panel-icon material-icons">event_available</span>
+        <div><span class="section-eyebrow">Scheduling</span><h5 class="fw-bold mb-0">{{ editingId ? 'Update appointment' : 'Book appointment' }}</h5></div>
+      </div>
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <div class="form-section"><span>Choose care provider</span><div class="row g-2">
+          <div class="col-sm-6"><mat-form-field appearance="outline" class="w-100"><mat-label>Department</mat-label><mat-select formControlName="departmentId" (selectionChange)="onDepartmentChanged()"><mat-option *ngFor="let department of departments" [value]="department.id">{{ department.name }}</mat-option></mat-select><mat-error>Select a department</mat-error></mat-form-field></div>
+          <div class="col-sm-6"><mat-form-field appearance="outline" class="w-100"><mat-label>Doctor</mat-label><mat-select formControlName="doctorId" [disabled]="!form.value.departmentId" (selectionChange)="onScheduleChanged()"><mat-optgroup *ngIf="selectedDepartmentHead" label="Department head"><mat-option disabled>{{ selectedDepartmentHead }}</mat-option></mat-optgroup><mat-optgroup label="Doctors"><mat-option *ngFor="let doctor of availableDoctors" [value]="doctor.id" [disabled]="doctor.availability !== 'YES'">Dr. {{ doctor.firstName }} {{ doctor.lastName }}</mat-option></mat-optgroup></mat-select><mat-error>Select a doctor</mat-error></mat-form-field></div>
+        </div></div>
+        <div class="form-section"><span>Choose patient</span><mat-form-field appearance="outline" class="w-100"><mat-label>Patient ID or name</mat-label><input matInput [formControl]="patientSearch" [matAutocomplete]="patientOptions" (input)="onPatientSearchChanged()" autocomplete="off"><mat-autocomplete #patientOptions="matAutocomplete" (optionSelected)="selectPatient($event.option.value)"><mat-option *ngFor="let patient of filteredPatients" [value]="patient.id">{{ patientLabel(patient) }}</mat-option></mat-autocomplete><mat-error *ngIf="form.get('patientId')?.touched && form.get('patientId')?.invalid">Select a patient</mat-error></mat-form-field></div>
+        <div class="form-section"><span>Choose schedule</span><div class="row g-2">
+          <div class="col-sm-6"><mat-form-field appearance="outline" class="w-100"><mat-label>Appointment date</mat-label><input matInput [matDatepicker]="appointmentPicker" [min]="minDate" formControlName="appointmentDate" readonly (dateChange)="onScheduleChanged()"><mat-datepicker-toggle matIconSuffix [for]="appointmentPicker"></mat-datepicker-toggle><mat-datepicker #appointmentPicker></mat-datepicker><mat-error>Select today or a future date</mat-error></mat-form-field></div>
+          <div class="col-sm-6"><mat-form-field appearance="outline" class="w-100"><mat-label>Available time</mat-label><mat-select formControlName="appointmentTime" [disabled]="!form.value.doctorId || !form.value.appointmentDate"><mat-option *ngFor="let time of timeSlots" [value]="time" [disabled]="isTimeBooked(time)">{{ time }}</mat-option></mat-select><mat-error>Select an available time</mat-error></mat-form-field></div>
+        </div></div>
+        <mat-form-field appearance="outline" class="w-100 mb-2"><mat-label>Reason for visit</mat-label><textarea matInput rows="2" formControlName="reason"></textarea><mat-error>Enter a reason for the appointment</mat-error></mat-form-field>
+        <mat-form-field *ngIf="editingId" appearance="outline" class="w-100 mb-3"><mat-label>Status</mat-label><mat-select formControlName="status"><mat-option value="SCHEDULED">Scheduled</mat-option><mat-option value="COMPLETED">Completed</mat-option><mat-option value="CANCELLED">Cancelled</mat-option></mat-select></mat-form-field>
+        <button mat-raised-button color="primary" class="save-appointment" type="submit"><span class="material-icons">event_available</span>{{ editingId ? 'Update appointment' : 'Confirm appointment' }}</button>
+      </form>
+    </mat-card>
+  </div>
+
+  <div class="col-xl-7 col-lg-6"><mat-card class="data-panel appointment-directory p-3">
+    <div class="directory-header"><div><span class="section-eyebrow">Schedule</span><h5>Appointments</h5><p>{{ isDoctor() ? 'Complete a checkup, then add the patient prescription.' : 'Availability updates automatically as appointments are booked.' }}</p></div><span class="badge bg-primary">{{ appointments.length }} total</span></div>
+    <div class="table-responsive" *ngIf="appointments.length; else noAppointments"><table class="table align-middle"><thead><tr><th>Doctor</th><th>Patient & visit reason</th><th>Date & time</th><th>Status</th><th>Actions</th></tr></thead><tbody>
+      <tr *ngFor="let item of appointments"><td><strong>Dr. {{ item.doctorName }}</strong></td><td><strong>{{ item.patientName }}</strong><small class="d-block text-muted">ID #{{ item.patientId }}</small><span class="visit-reason">{{ item.reason || 'No reason recorded' }}</span></td><td>{{ item.appointmentDate | date:'mediumDate' }}<small class="d-block text-muted">{{ item.appointmentTime }}</small></td><td><span class="badge bg-primary">{{ item.status }}</span></td><td>
+        <ng-container *ngIf="isDoctor(); else officeActions"><mat-slide-toggle class="completion-toggle" [checked]="item.status === 'COMPLETED'" [disabled]="item.status === 'COMPLETED' || item.status === 'CANCELLED'" (change)="complete(item, $event.checked)">Completed</mat-slide-toggle><button mat-stroked-button class="prescription-action" *ngIf="item.status === 'COMPLETED'" (click)="addPrescription(item)"><span class="material-icons">medication</span>Add prescription</button></ng-container>
+        <ng-template #officeActions><button mat-button color="primary" (click)="edit(item)">Edit</button><button mat-button color="warn" (click)="delete(item)">Cancel</button></ng-template>
+      </td></tr>
+    </tbody></table></div>
+    <ng-template #noAppointments><div class="empty-state appointment-empty"><span class="material-icons">event_busy</span><strong>No appointments yet</strong><span>Book an appointment to begin scheduling care.</span></div></ng-template>
+  </mat-card></div>
+</div>

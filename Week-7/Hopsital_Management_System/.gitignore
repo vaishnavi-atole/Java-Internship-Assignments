@@ -1,0 +1,31 @@
+# Operating system
+.DS_Store
+Thumbs.db
+
+# IDEs and editors
+.vscode/
+.idea/
+*.iml
+
+# Logs and temporary files
+logs/
+*.log
+*.tmp
+*.temp
+
+# Local environment overrides
+.env
+.env.local
+
+# Backend build output
+backend/target/
+backend/uploads/
+
+# Frontend build and dependency output
+frontend/node_modules/
+frontend/.angular/
+frontend/dist/
+frontend/coverage/
+frontend/.cache/
+frontend/tmp/
+frontend/out-tsc/

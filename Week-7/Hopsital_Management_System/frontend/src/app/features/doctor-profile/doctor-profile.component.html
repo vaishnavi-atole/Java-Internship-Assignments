@@ -1,0 +1,29 @@
+<app-page-header title="My Profile" subtitle="Review and maintain your professional information"></app-page-header>
+<div class="profile-layout" *ngIf="doctor; else loading">
+  <mat-card class="profile-summary">
+    <div class="profile-avatar">{{ doctor.firstName.charAt(0) }}{{ doctor.lastName.charAt(0) }}</div>
+    <span class="section-eyebrow">Doctor account</span>
+    <h2>Dr. {{ doctor.firstName }} {{ doctor.lastName }}</h2>
+    <p>{{ doctor.specialization }} · {{ doctor.departmentName }}</p>
+    <span class="availability" [class.is-available]="doctor.availability === 'YES'">{{ doctor.availability === 'YES' ? 'Available' : 'Unavailable' }}</span>
+  </mat-card>
+  <mat-card class="profile-form">
+    <div class="profile-form-heading"><h3>Professional details</h3><button *ngIf="!editing" mat-stroked-button color="primary" type="button" (click)="startEditing()"><span class="material-icons">edit</span>Edit profile</button></div>
+    <form [formGroup]="form" (ngSubmit)="save()">
+      <div class="row g-3">
+        <div class="col-md-6"><mat-form-field appearance="outline" class="w-100"><mat-label>First name</mat-label><input matInput formControlName="firstName"></mat-form-field></div>
+        <div class="col-md-6"><mat-form-field appearance="outline" class="w-100"><mat-label>Last name</mat-label><input matInput formControlName="lastName"></mat-form-field></div>
+        <div class="col-md-6"><mat-form-field appearance="outline" class="w-100"><mat-label>Qualification</mat-label><input matInput formControlName="qualification"></mat-form-field></div>
+        <div class="col-md-6"><mat-form-field appearance="outline" class="w-100"><mat-label>Specialization</mat-label><input matInput formControlName="specialization"></mat-form-field></div>
+        <div class="col-md-6"><mat-form-field appearance="outline" class="w-100"><mat-label>Experience (years)</mat-label><input matInput type="number" formControlName="experienceYears"></mat-form-field></div>
+        <div class="col-md-6"><mat-form-field appearance="outline" class="w-100"><mat-label>Consultation fee</mat-label><input matInput type="number" formControlName="consultationFee"></mat-form-field></div>
+        <div class="col-md-6"><mat-form-field appearance="outline" class="w-100"><mat-label>Phone</mat-label><input matInput formControlName="phone"></mat-form-field></div>
+        <div class="col-md-6"><mat-form-field appearance="outline" class="w-100"><mat-label>Email</mat-label><input matInput type="email" formControlName="email"></mat-form-field></div>
+        <div class="col-md-6"><mat-form-field appearance="outline" class="w-100"><mat-label>Availability</mat-label><mat-select formControlName="availability"><mat-option value="YES">Available</mat-option><mat-option value="NO">Unavailable</mat-option></mat-select></mat-form-field></div>
+        <div class="col-md-6" *ngIf="editing"><mat-form-field appearance="outline" class="w-100"><mat-label>New password</mat-label><input matInput type="password" formControlName="password" autocomplete="new-password"></mat-form-field></div>
+      </div>
+      <div class="profile-actions" *ngIf="editing"><button mat-raised-button color="primary" type="submit"><span class="material-icons">save</span>Save changes</button><button mat-button type="button" (click)="cancelEditing()">Cancel</button></div>
+    </form>
+  </mat-card>
+</div>
+<ng-template #loading><mat-card class="profile-form">Your profile is loading.</mat-card></ng-template>

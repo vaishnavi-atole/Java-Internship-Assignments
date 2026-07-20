@@ -1,0 +1,115 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+:root {
+  --ink: #183147;
+  --muted: #6b7b8c;
+  --canvas: #f4f8fb;
+  --surface: #ffffff;
+  --surface-soft: #f8fbfd;
+  --line: #e3edf3;
+  --primary: #0c6e99;
+  --primary-dark: #075878;
+  --teal: #0da493;
+  --teal-soft: #e5f8f4;
+  --navy: #102b46;
+  --danger: #d94f5c;
+  --warning: #e89b25;
+  --shadow-sm: 0 5px 18px rgba(19, 51, 76, .06);
+  --shadow: 0 18px 45px rgba(19, 51, 76, .10);
+  --radius: 18px;
+}
+
+* { box-sizing: border-box; }
+html, body { min-height: 100%; }
+body {
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--canvas);
+  color: var(--ink);
+  letter-spacing: -.01em;
+}
+button, input, textarea, select { font: inherit; }
+
+body.dark-mode {
+  --ink: #edf6fb;
+  --muted: #9db1c0;
+  --canvas: #0d1c2a;
+  --surface: #13283a;
+  --surface-soft: #183146;
+  --line: #294459;
+  --primary: #47b4df;
+  --primary-dark: #75c9e7;
+  --teal: #46d0bd;
+  --teal-soft: #153d3d;
+  --navy: #0c1b2a;
+  --shadow-sm: 0 5px 18px rgba(0, 0, 0, .18);
+  --shadow: 0 18px 45px rgba(0, 0, 0, .26);
+}
+
+.text-muted { color: var(--muted) !important; }
+.card, .mat-mdc-card, .surface-card {
+  background: var(--surface) !important;
+  color: var(--ink);
+  border: 1px solid var(--line) !important;
+  border-radius: var(--radius) !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+.card-shadow { box-shadow: var(--shadow) !important; }
+.btn-primary, .mat-mdc-raised-button.mat-primary {
+  border: 0 !important;
+  border-radius: 10px !important;
+  background: linear-gradient(135deg, var(--primary), var(--teal)) !important;
+  box-shadow: 0 8px 18px rgba(12, 110, 153, .20);
+}
+.btn-primary:hover, .mat-mdc-raised-button.mat-primary:hover { filter: brightness(1.04); transform: translateY(-1px); }
+.btn, .mat-mdc-raised-button { transition: .2s ease; }
+.mat-mdc-form-field { --mdc-outlined-text-field-outline-color: var(--line); --mdc-outlined-text-field-hover-outline-color: var(--primary); --mdc-outlined-text-field-focus-outline-color: var(--primary); }
+.mat-mdc-form-field, .mat-mdc-select, .mat-mdc-input-element { color: var(--ink) !important; }
+.mat-mdc-text-field-wrapper { background: var(--surface-soft) !important; }
+.table { --bs-table-bg: transparent; --bs-table-color: var(--ink); --bs-table-border-color: var(--line); margin: 0; }
+.table > :not(caption) > * > * { padding: 1rem .85rem; }
+.table thead th { color: var(--muted); background: var(--surface-soft); border-bottom-width: 1px; font-size: .73rem; letter-spacing: .07em; text-transform: uppercase; white-space: nowrap; }
+.table tbody tr { transition: background .18s ease; }
+.table tbody tr:hover { background: color-mix(in srgb, var(--primary) 5%, transparent); }
+.table-responsive { border: 1px solid var(--line); border-radius: 14px; overflow: auto; }
+.badge { border-radius: 999px; font-size: .72rem; font-weight: 700; letter-spacing: .03em; padding: .45rem .65rem; }
+.badge.bg-primary { background: #dceff7 !important; color: #086086 !important; }
+.badge.bg-success { background: #ddf6ec !important; color: #08775d !important; }
+.badge.bg-warning { background: #fff2d8 !important; color: #9b5c00 !important; }
+.badge.bg-secondary { background: #e9eef2 !important; color: #586a78 !important; }
+.page-grid { display: grid; gap: 1.5rem; }
+.form-panel { position: sticky; top: 1.5rem; }
+.panel-heading { display: flex; align-items: center; gap: .75rem; margin-bottom: 1.25rem; }
+.panel-heading .panel-icon { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 12px; color: var(--primary); background: color-mix(in srgb, var(--primary) 12%, transparent); }
+.data-panel { min-height: 250px; overflow: hidden; }
+.table-action { min-width: auto !important; padding: 0 .35rem !important; }
+.empty-state { display: grid; place-items: center; gap: .5rem; min-height: 180px; color: var(--muted); text-align: center; }
+.empty-state .material-icons { font-size: 2.5rem; color: var(--primary); opacity: .7; }
+.section-eyebrow { color: var(--teal); font-size: .72rem; font-weight: 800; letter-spacing: .11em; text-transform: uppercase; }
+.mat-mdc-dialog-container { --mdc-dialog-container-color: var(--surface); --mdc-dialog-supporting-text-color: var(--muted); --mdc-dialog-subhead-color: var(--ink); }
+.mat-mdc-snack-bar-container { --mdc-snackbar-container-color: var(--navy); --mdc-snackbar-supporting-text-color: #fff; }
+body.dark-mode .mat-mdc-select-panel, body.dark-mode .mat-mdc-menu-panel { background: var(--surface) !important; }
+
+@media (max-width: 991px) { .form-panel { position: static; } }
+@media (max-width: 575px) { .table > :not(caption) > * > * { padding: .8rem .65rem; } .card, .mat-mdc-card { border-radius: 14px !important; } }
+body.role-doctor app-patients .patient-workspace > div:first-child,
+body.role-doctor app-patients .header-action,
+body.role-doctor app-patients button[color='primary'],
+body.role-doctor app-patients button[color='warn'],
+body.role-doctor app-appointments:not(.appointment-editing) .appointment-workspace > div:first-child,
+body.role-doctor app-appointments:not(.appointment-editing) .header-action,
+body.role-doctor app-appointments button[color='warn'] { display: none !important; }
+body.role-doctor app-patients .patient-workspace > div:last-child,
+body.role-doctor app-appointments:not(.appointment-editing) .appointment-workspace > div:last-child { flex: 0 0 100%; max-width: 100%; }
+
+body.role-admin app-prescriptions .row > div:first-child,
+body.role-admin app-billing .row > div:first-child,
+body.role-admin app-prescriptions .header-action,
+body.role-admin app-billing .header-action { display: none !important; }
+body.role-admin app-prescriptions .row > div:last-child,
+body.role-admin app-billing .row > div:last-child { flex: 0 0 100%; max-width: 100%; }
+body.role-admin app-prescriptions th:last-child,
+body.role-admin app-prescriptions td:last-child,
+body.role-admin app-billing th:last-child,
+body.role-admin app-billing td:last-child { display: none; }

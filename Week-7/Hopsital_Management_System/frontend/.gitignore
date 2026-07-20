@@ -1,0 +1,11 @@
+# Dependencies and Angular output
+node_modules/
+.angular/
+dist/
+coverage/
+.cache/
+tmp/
+out-tsc/
+
+# Logs
+*.log
