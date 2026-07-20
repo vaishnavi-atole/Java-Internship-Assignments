@@ -104,3 +104,7 @@ Default seed credentials can vary when the database already contains users. For 
 - Inventory management
 - Admissions and discharge workflow
 - PDF report export and server-side pagination
+
+## Author
+
+**Vaishnavi Rajaram Atole**
